@@ -1,0 +1,12 @@
+{
+  "name": "com.thomashoussin.fronius",
+  "version": "0.0.1",
+  "main": "app.js",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "he": "^1.2.0"
+  },
+  "devDependencies": {
+    "homey": "^2.9.2"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "inverter",
+  "name": {
+    "en": "Inverter"
+  },
+  "class": "solarpanel",
+  "capabilities": [
+    "measure_power",
+    "meter_power"
+  ],
+  "images": {
+    "large": "/drivers/inverter/assets/images/large.png",
+    "small": "/drivers/inverter/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "enter_ip",
+      "next": "list_devices"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "prev": "enter_ip",
+        "next": "add_devices"
+      },
+      "options": {
+        "singular": false
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "id": "ip",
+      "type": "text",
+      "label": {
+        "en": "Fronius Datamanager IP address"
+      }
+    }
+  ]
+}

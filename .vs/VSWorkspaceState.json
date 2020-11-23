@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.homeycompose",
+    "\\.homeycompose\\flow",
+    "\\drivers",
+    "\\drivers\\datamanager",
+    "\\drivers\\datamanager\\assets",
+    "\\drivers\\datamanager\\assets\\images",
+    "\\drivers\\datamanager\\pair",
+    "\\drivers\\inverter\\assets",
+    "\\drivers\\inverter\\assets\\images",
+    "\\locales"
+  ],
+  "SelectedNode": "\\drivers\\datamanager\\driver.js",
+  "PreviewInSolutionExplorer": false
+}

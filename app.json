@@ -1,0 +1,72 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.thomashoussin.fronius",
+  "version": "0.0.1",
+  "compatibility": ">=3.1.0",
+  "sdk": 2,
+  "name": {
+    "en": "Fronius"
+  },
+  "description": {
+    "en": "Adds support for Fronius inverter"
+  },
+  "category": [
+    "energy"
+  ],
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "author": {
+    "name": "Thomas Houssin",
+    "email": "thomas.houssin@gmail.com"
+  },
+  "drivers": [
+    {
+      "id": "inverter",
+      "name": {
+        "en": "Inverter"
+      },
+      "class": "solarpanel",
+      "capabilities": [
+        "measure_power",
+        "meter_power"
+      ],
+      "images": {
+        "large": "/drivers/inverter/assets/images/large.png",
+        "small": "/drivers/inverter/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "enter_ip",
+          "next": "list_devices"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "enter_ip",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "id": "ip",
+          "type": "text",
+          "label": {
+            "en": "Fronius Datamanager IP address"
+          }
+        }
+      ]
+    }
+  ]
+}
