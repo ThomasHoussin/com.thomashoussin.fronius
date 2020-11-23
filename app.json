@@ -31,8 +31,27 @@
       "class": "solarpanel",
       "capabilities": [
         "measure_power",
-        "meter_power"
+        "meter_power",
+        "meter_power.YEAR",
+        "meter_power.TOTAL"
       ],
+      "capabilitiesOptions": {
+        "meter_power": {
+          "title": {
+            "en": "Daily Production"
+          }
+        },
+        "meter_power.YEAR": {
+          "title": {
+            "en": "Yearly Production"
+          }
+        },
+        "meter_power.TOTAL": {
+          "title": {
+            "en": "Total Production"
+          }
+        }
+      },
       "images": {
         "large": "/drivers/inverter/assets/images/large.png",
         "small": "/drivers/inverter/assets/images/small.png"
@@ -64,6 +83,28 @@
           "type": "text",
           "label": {
             "en": "Fronius Datamanager IP address"
+          }
+        },
+        {
+          "id": "DeviceId",
+          "type": "number",
+          "label": {
+            "en": "Fronius inverter DeviceId"
+          }
+        },
+        {
+          "id": "PVPower",
+          "type": "number",
+          "label": {
+            "en": "PV power connected to this inverter (in watts)"
+          }
+        },
+        {
+          "id": "polling_interval",
+          "type": "number",
+          "value": 60,
+          "label": {
+            "en": "Polling interval for data collection, in seconds"
           }
         }
       ]

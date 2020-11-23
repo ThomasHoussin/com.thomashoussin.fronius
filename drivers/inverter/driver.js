@@ -5,24 +5,22 @@ const fetch = require('node-fetch');
 const he = require('he');
 
 const checkPath = '/solar_api/v1/GetInverterInfo.cgi';
-const inverterPath = '/solar_api/v1/GetInverterRealtimeData.cgi?Scope=System';
 
 class Fronius extends Homey.Driver {
     /**
      * onInit is called when the driver is initialized.
      */
     async onInit() {
-        this.log('MyDriver has been initialized');
+        this.log('Fronius has been initialized');
     }
 
 
     onPair(socket) {
-        var ip ;
         var devices ;
 
         socket.on('validate', function (data, callback) {
             console.log("Validate new connection settings");
-            ip = data.host;
+            let ip = data.host;
 
             const validationUrl = `http://${ip}${checkPath}`;
             console.log(validationUrl);
@@ -30,11 +28,11 @@ class Fronius extends Homey.Driver {
             fetch(validationUrl)
                 .then(checkResponseStatus)
                 .then(result => result.json())
-                .then(json => buildDevices(json.Body.Data))
+                .then(json => buildDevices(json.Body.Data, ip))
                 .then(list => {
                     devices = list;
                     callback(null, 'ok');
-                }) 
+                })
                 .catch(error => {
                     callback(new Error(Homey.__('ip_error')));
                 });
@@ -65,27 +63,30 @@ function checkResponseStatus(res) {
     } else {
         console.log(`Wrong response status : ${res.status} (${res.statusText})`);
         callback(new Error(Homey.__('ip_error')));
-        //throw new Error(`Wrong response status : ${res.status} (${res.statusText})`);
     }
 }
 
-function inverterToDevice(json) {
+function inverterToDevice(json, ip, DeviceId) {
     let device = {
         name: he.decode(json.CustomName),
-        settings: {},
+        settings: {
+            ip: ip,
+            DeviceId: parseInt(DeviceId, 10),
+            PVPower: json.PVPower,
+        },
         data: {
             id: json.UniqueID,
         }
     };
+    console.log(device);
     return device;
 }
 
-function buildDevices(json) {
+function buildDevices(json,ip) {
     var devices = [];
-    for (var deviceId in json) {
-        if (json.hasOwnProperty(deviceId)) {
-            console.log(deviceId);
-            devices.push(inverterToDevice(json[deviceId]));
+    for (var id in json) {
+        if (json.hasOwnProperty(id)) {
+            devices.push(inverterToDevice(json[id],ip,id));
         }
     };
     return devices;    

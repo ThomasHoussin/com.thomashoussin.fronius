@@ -6,40 +6,76 @@
   "class": "solarpanel",
   "capabilities": [
     "measure_power",
-    "meter_power"
+    "meter_power",
+    "meter_power.YEAR",
+    "meter_power.TOTAL"
   ],
-  "images": {
-    "large": "/drivers/inverter/assets/images/large.png",
-    "small": "/drivers/inverter/assets/images/small.png"
+  "capabilitiesOptions": {
+    "meter_power": {
+      "title": { "en": "Daily Production" }
+    },
+    "meter_power.YEAR": {
+      "title": { "en": "Yearly Production" }
+    },
+    "meter_power.TOTAL": {
+      "title": { "en": "Total Production" }
+    }
   },
-  "pair": [
-    {
-      "id": "enter_ip",
-      "next": "list_devices"
+    "images": {
+      "large": "/drivers/inverter/assets/images/large.png",
+      "small": "/drivers/inverter/assets/images/small.png"
     },
-    {
-      "id": "list_devices",
-      "template": "list_devices",
-      "navigation": {
-        "prev": "enter_ip",
-        "next": "add_devices"
+    "pair": [
+      {
+        "id": "enter_ip",
+        "next": "list_devices"
       },
-      "options": {
-        "singular": false
+      {
+        "id": "list_devices",
+        "template": "list_devices",
+        "navigation": {
+          "prev": "enter_ip",
+          "next": "add_devices"
+        },
+        "options": {
+          "singular": false
+        }
+      },
+      {
+        "id": "add_devices",
+        "template": "add_devices"
       }
-    },
-    {
-      "id": "add_devices",
-      "template": "add_devices"
-    }
-  ],
-  "settings": [
-    {
-      "id": "ip",
-      "type": "text",
-      "label": {
-        "en": "Fronius Datamanager IP address"
+    ],
+    "settings": [
+      {
+        "id": "ip",
+        "type": "text",
+        "label": {
+          "en": "Fronius Datamanager IP address"
+        }
+      },
+      {
+        "id": "DeviceId",
+        "type": "number",
+        "label": {
+          "en": "Fronius inverter DeviceId"
+        }
+      },
+      {
+        "id": "PVPower",
+        "type": "number",
+        "label": {
+          "en": "PV power connected to this inverter (in watts)"
+        }
+      },
+      {
+        "id": "polling_interval",
+        "type": "number",
+        "value": 60,
+        "label": {
+          "en": "Polling interval for data collection, in seconds"
+        }
       }
-    }
-  ]
-}
+
+    ]
+  }
