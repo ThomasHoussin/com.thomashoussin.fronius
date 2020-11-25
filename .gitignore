@@ -2,3 +2,6 @@ env.json
 node_modules/
 .vs/VSWorkspaceState.json
 .vs/slnx.sqlite
+.vs/com.thomashoussin.fronius/v15/.suo
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json

@@ -22,7 +22,7 @@ class Inverter extends Homey.Device {
 
     async pollDevice() {
         while (this.polling) {
-            console.log("updating");
+            console.log(`Updating inverter ${this.getName()}`);
             this.updateInverter();
             await delay(this.getSetting('polling_interval'));
         }
@@ -87,6 +87,14 @@ class Inverter extends Homey.Device {
         this.setCapabilityValue('meter_power.TOTAL', typeof data.TOTAL_ENERGY == 'undefined' ? 0 : data.TOTAL_ENERGY.Value / 1000);
         //AC power ; default to 0 
         this.setCapabilityValue('measure_power', typeof data.PAC == 'undefined' ? 0 : data.PAC.Value);
+        //AC current ; default to 0 
+        this.setCapabilityValue('measure_current.AC', typeof data.IAC == 'undefined' ? 0 : data.IAC.Value);
+        //AC voltage ; default to 0 
+        this.setCapabilityValue('measure_voltage.AC', typeof data.UAC == 'undefined' ? 0 : data.UAC.Value);
+        //DC current ; default to 0 
+        this.setCapabilityValue('measure_current.DC', typeof data.IDC == 'undefined' ? 0 : data.IDC.Value);
+        //DC voltage ; default to 0 
+        this.setCapabilityValue('measure_voltage.DC', typeof data.UDC == 'undefined' ? 0 : data.UDC.Value);
     }
 }
 

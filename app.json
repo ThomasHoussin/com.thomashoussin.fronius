@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thomashoussin.fronius",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "compatibility": ">=3.1.0",
   "sdk": 2,
   "name": {
@@ -24,6 +24,71 @@
   },
   "drivers": [
     {
+      "id": "fronius-powerflow",
+      "name": {
+        "en": "PowerFlow"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_power",
+        "measure_power.PV",
+        "measure_power.GRID",
+        "measure_power.LOAD",
+        "measure_power.AKKU"
+      ],
+      "capabilitiesOptions": {
+        "measure_power.PV": {
+          "title": {
+            "en": "PV Power"
+          }
+        },
+        "measure_power.GRID": {
+          "title": {
+            "en": "Grid Power"
+          }
+        },
+        "measure_power.LOAD": {
+          "title": {
+            "en": "Load Power"
+          }
+        },
+        "measure_power.AKKU": {
+          "title": {
+            "en": "Akku Power"
+          }
+        }
+      },
+      "energy": {
+        "cumulative": true
+      },
+      "images": {
+        "large": "/drivers/fronius-powerflow/assets/images/large.jpg",
+        "small": "/drivers/fronius-powerflow/assets/images/small.jpg"
+      },
+      "pair": [
+        {
+          "id": "enter_values"
+        }
+      ],
+      "settings": [
+        {
+          "id": "ip",
+          "type": "text",
+          "label": {
+            "en": "Fronius Datamanager IP address"
+          }
+        },
+        {
+          "id": "polling_interval",
+          "type": "number",
+          "value": 60,
+          "label": {
+            "en": "Polling interval for data collection, in seconds"
+          }
+        }
+      ]
+    },
+    {
       "id": "inverter",
       "name": {
         "en": "Inverter"
@@ -31,6 +96,10 @@
       "class": "solarpanel",
       "capabilities": [
         "measure_power",
+        "measure_current.AC",
+        "measure_current.DC",
+        "measure_voltage.AC",
+        "measure_voltage.DC",
         "meter_power",
         "meter_power.YEAR",
         "meter_power.TOTAL"
@@ -49,6 +118,26 @@
         "meter_power.TOTAL": {
           "title": {
             "en": "Total Production"
+          }
+        },
+        "measure_current.AC": {
+          "title": {
+            "en": "AC current"
+          }
+        },
+        "measure_current.DC": {
+          "title": {
+            "en": "DC current"
+          }
+        },
+        "measure_voltage.AC": {
+          "title": {
+            "en": "AC voltage"
+          }
+        },
+        "measure_voltage.DC": {
+          "title": {
+            "en": "DC voltage"
           }
         }
       },

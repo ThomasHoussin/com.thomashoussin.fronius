@@ -6,6 +6,10 @@
   "class": "solarpanel",
   "capabilities": [
     "measure_power",
+    "measure_current.AC",
+    "measure_current.DC",
+    "measure_voltage.AC",
+    "measure_voltage.DC",
     "meter_power",
     "meter_power.YEAR",
     "meter_power.TOTAL"
@@ -19,6 +23,18 @@
     },
     "meter_power.TOTAL": {
       "title": { "en": "Total Production" }
+    },
+    "measure_current.AC": {
+      "title": { "en": "AC current" }
+    },
+    "measure_current.DC": {
+      "title": { "en": "DC current" }
+    },
+    "measure_voltage.AC": {
+      "title": { "en": "AC voltage" }
+    },
+    "measure_voltage.DC": {
+      "title": { "en": "DC voltage" }
     }
   },
     "images": {

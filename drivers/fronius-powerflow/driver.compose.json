@@ -1,0 +1,57 @@
+{
+  "id": "fronius-powerflow",
+  "name": {
+    "en": "PowerFlow"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "measure_power",
+    "measure_power.PV",
+    "measure_power.GRID",
+    "measure_power.LOAD",
+    "measure_power.AKKU"
+  ],
+  "capabilitiesOptions": {
+    "measure_power.PV": {
+      "title": { "en": "PV Power" }
+    },
+    "measure_power.GRID": {
+      "title": { "en": "Grid Power" }
+    },
+    "measure_power.LOAD": {
+      "title": { "en": "Load Power" }
+    },
+    "measure_power.AKKU": {
+      "title": { "en": "Akku Power" }
+    }
+  },
+  "energy": {
+    "cumulative": true
+  },
+  "images": {
+    "large": "/drivers/fronius-powerflow/assets/images/large.jpg",
+    "small": "/drivers/fronius-powerflow/assets/images/small.jpg"
+  },
+  "pair": [
+    {
+      "id": "enter_values"
+    }
+  ],
+  "settings": [
+    {
+      "id": "ip",
+      "type": "text",
+      "label": {
+        "en": "Fronius Datamanager IP address"
+      }
+    },
+    {
+      "id": "polling_interval",
+      "type": "number",
+      "value": 60,
+      "label": {
+        "en": "Polling interval for data collection, in seconds"
+      }
+    }
+  ]
+}

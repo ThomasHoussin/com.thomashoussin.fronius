@@ -9,3 +9,7 @@ Developers
 
 * [Diederik Bakker](https://github.com/DiedB)
    * Fronius apps use some code fom Solar Panels 
+   
+Other
+----------
+* PowerFlow icon : Electric Meter by Creative Stall from the Noun Project

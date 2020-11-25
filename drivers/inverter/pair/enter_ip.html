@@ -10,8 +10,6 @@
             Homey.emit('validate', {
                 "host": hostname,
             }, (err, result) => {
-                debugger;
-                console.log("No error returned from backend");
                 if (!err) {
                     Homey.nextView();
                 } else {
@@ -25,6 +23,6 @@
 
 <form>
     <label for="hostname">Hostname/IP address</label>
-    <input type="text" id="hostname" name="hostname" placeholder="IP/hostname" /><br />
+    <input type="text" id="hostname" name="hostname" placeholder="IP/hostname" required/><br />
     <button type="button" onclick="doSubmit()">Save</button>
 </form>

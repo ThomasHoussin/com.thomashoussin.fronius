@@ -31,7 +31,7 @@ class Fronius extends Homey.Driver {
                 .then(json => buildDevices(json.Body.Data, ip))
                 .then(list => {
                     devices = list;
-                    callback(null, 'ok');
+                    callback(false, 'ok');
                 })
                 .catch(error => {
                     callback(new Error(Homey.__('ip_error')));
