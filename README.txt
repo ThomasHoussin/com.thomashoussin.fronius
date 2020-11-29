@@ -13,5 +13,7 @@ Feel free to donate to  support the project !
 
 # Version History
 
+### v0.0.3
+	- Small changes for app publishing
 ### v0.0.2
 	- Basic support for Inverter and Power Flow

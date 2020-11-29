@@ -1,13 +1,23 @@
 {
   "id": "com.thomashoussin.fronius",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "compatibility": ">=3.1.0",
   "sdk": 2,
   "name": {
     "en": "Fronius"
   },
   "description": {
-    "en": "Adds support for Fronius inverter"
+    "en": "Adds support for Fronius inverter and Smart Meter"
+  },
+  "tags": {
+	"en": [ 
+	"fronius",
+	"PV",
+	"Smartmeter",
+	"solar",
+	"panels",
+	"inverter"
+	]
   },
   "category": [
     "energy"

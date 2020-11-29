@@ -38,8 +38,8 @@
     }
   },
     "images": {
-      "large": "/drivers/inverter/assets/images/large.png",
-      "small": "/drivers/inverter/assets/images/small.png"
+      "large": "/drivers/inverter/assets/images/large.jpg",
+      "small": "/drivers/inverter/assets/images/small.jpg"
     },
     "pair": [
       {
