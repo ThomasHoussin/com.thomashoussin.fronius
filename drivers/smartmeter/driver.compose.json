@@ -1,41 +1,36 @@
 {
-  "id": "inverter",
+  "id": "smartmeter",
   "name": {
-    "en": "Inverter"
+    "en": "smartmeter"
   },
-  "class": "solarpanel",
+  "class": "sensor",
   "capabilities": [
     "measure_power",
-    "measure_current.AC",
-    "measure_current.DC",
-    "measure_voltage.AC",
-    "measure_voltage.DC",
+    "measure_current",
+    "measure_voltage",
+    "measure_frequency",
     "meter_power",
-    "meter_power.YEAR",
-    "meter_power.TOTAL"
+    "meter_power.injected"
   ],
   "capabilitiesOptions": {
     "meter_power": {
-      "title": { "en": "Daily Production" }
+      "title": { "en": "Energy consumed" }
     },
-    "meter_power.YEAR": {
-      "title": { "en": "Yearly Production" }
+    "meter_power.injected": {
+      "title": { "en": "Energy injected" }
     },
-    "meter_power.TOTAL": {
-      "title": { "en": "Total Production" }
+    "measure_current": {
+      "title": { "en": "Current" }
     },
-    "measure_current.AC": {
-      "title": { "en": "AC current" }
+    "measure_voltage": {
+      "title": { "en": "Voltage" }
     },
-    "measure_current.DC": {
-      "title": { "en": "DC current" }
-    },
-    "measure_voltage.AC": {
-      "title": { "en": "AC voltage" }
-    },
-    "measure_voltage.DC": {
-      "title": { "en": "DC voltage" }
+    "measure_frequency": {
+      "title": { "en": "Phase frequency" }
     }
+  },
+  "energy": {
+    "cumulative": true
   },
   "images": {
     "large": "/drivers/inverter/assets/images/large.png",
@@ -88,17 +83,10 @@
           "type": "number",
           "value": 60,
           "label": {
-            "en": "Polling interval in seconds"
+            "en": "Polling interval for data collection, in seconds"
           }
         }
       ]
-    },
-    {
-      "id": "PVPower",
-      "type": "number",
-      "label": {
-        "en": "PV power connected (in watts)"
-      }
     }
   ]
 }

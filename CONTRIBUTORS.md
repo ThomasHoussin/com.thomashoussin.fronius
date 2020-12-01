@@ -13,3 +13,4 @@ Developers
 Other
 ----------
 * PowerFlow icon : Electric Meter by Creative Stall from the Noun Project
+* Frequecny capability icon : frequency by Andrejs Kirma from the Noun Project

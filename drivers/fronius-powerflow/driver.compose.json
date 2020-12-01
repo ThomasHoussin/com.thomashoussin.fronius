@@ -39,19 +39,27 @@
   ],
   "settings": [
     {
-      "id": "ip",
-      "type": "text",
+      "type": "group",
       "label": {
-        "en": "Fronius Datamanager IP address"
-      }
-    },
-    {
-      "id": "polling_interval",
-      "type": "number",
-      "value": 60,
-      "label": {
-        "en": "Polling interval for data collection, in seconds"
-      }
+        "en": "Request settings"
+      },
+      "children": [
+        {
+          "id": "ip",
+          "type": "text",
+          "label": {
+            "en": "Fronius Datamanager IP address"
+          }
+        },
+        {
+          "id": "polling_interval",
+          "type": "number",
+          "value": 60,
+          "label": {
+            "en": "Polling interval in seconds"
+          }
+        }
+      ]
     }
   ]
 }

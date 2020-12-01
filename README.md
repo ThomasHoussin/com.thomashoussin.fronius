@@ -13,6 +13,10 @@ Feel free to donate to  support the project !
 
 # Version History
 
+### v0.0.5
+	- New Smart Meter driver
+### v0.0.4
+	- Update drivers images, fixed README.txt
 ### v0.0.3
 	- Small changes for app publishing
 ### v0.0.2

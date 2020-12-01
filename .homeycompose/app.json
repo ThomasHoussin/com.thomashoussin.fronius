@@ -30,5 +30,16 @@
   "author": {
     "name": "Thomas Houssin",
     "email": "thomas.houssin@gmail.com"
-  }
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "thomas.houssin@gmail.com"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/ThomasHoussin/com.thomashoussin.fronius/issues"
+  },
+  "source": "https://github.com/ThomasHoussin/com.thomashoussin.fronius"
 }
