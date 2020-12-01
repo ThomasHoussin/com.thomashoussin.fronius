@@ -1,7 +1,7 @@
 {
   "id": "smartmeter",
   "name": {
-    "en": "smartmeter"
+    "en": "Smartmeter"
   },
   "class": "sensor",
   "capabilities": [
@@ -33,8 +33,8 @@
     "cumulative": true
   },
   "images": {
-    "large": "/drivers/inverter/assets/images/large.png",
-    "small": "/drivers/inverter/assets/images/small.png"
+    "large": "/drivers/smartmeter/assets/images/large.png",
+    "small": "/drivers/smartmeter/assets/images/small.png"
   },
   "pair": [
     {

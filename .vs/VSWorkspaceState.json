@@ -8,8 +8,9 @@
     "\\drivers\\fronius-powerflow",
     "\\drivers\\inverter",
     "\\drivers\\inverter\\assets",
-    "\\drivers\\inverter\\pair"
+    "\\drivers\\inverter\\pair",
+    "\\drivers\\smartmeter"
   ],
-  "SelectedNode": "\\drivers\\fronius-powerflow\\driver.compose.json",
+  "SelectedNode": "\\drivers\\smartmeter\\driver.compose.json",
   "PreviewInSolutionExplorer": false
 }
