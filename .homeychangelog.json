@@ -1,5 +1,8 @@
 {
   "0.0.3": {
     "en": "First test version for Fronius inverter and Smart Meter"
+  },
+  "0.0.4": {
+    "en": "Update drivers images, fixed README.txt"
   }
 }

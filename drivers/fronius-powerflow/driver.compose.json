@@ -29,8 +29,8 @@
     "cumulative": true
   },
   "images": {
-    "large": "/drivers/fronius-powerflow/assets/images/large.jpg",
-    "small": "/drivers/fronius-powerflow/assets/images/small.jpg"
+    "large": "/drivers/fronius-powerflow/assets/images/large.png",
+    "small": "/drivers/fronius-powerflow/assets/images/small.png"
   },
   "pair": [
     {

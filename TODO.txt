@@ -1,0 +1,3 @@
+http://10.0.0.90/solar_api/v1/GetArchiveData.cgi?Scope=System&StartDate=28.11.2020&EndDate=30.11.2020&Channel=EnergyReal_WAC_Sum_Produced&Channel=EnergyReal_WAC_Plus_Absolute&Channel=EnergyReal_WAC_Minus_Absolute&SeriesType=DailySum
+
+http://10.0.0.90/solar_api/v1/GetMeterRealtimeData.cgi?Scope=System

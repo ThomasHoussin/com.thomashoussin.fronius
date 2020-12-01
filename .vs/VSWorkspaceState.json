@@ -6,11 +6,10 @@
     "\\.homeycompose\\flow",
     "\\drivers",
     "\\drivers\\fronius-powerflow",
-    "\\drivers\\fronius-powerflow\\pair",
     "\\drivers\\inverter",
     "\\drivers\\inverter\\assets",
     "\\drivers\\inverter\\pair"
   ],
-  "SelectedNode": "\\drivers\\inverter\\driver.js",
+  "SelectedNode": "\\drivers\\fronius-powerflow\\driver.compose.json",
   "PreviewInSolutionExplorer": false
 }
