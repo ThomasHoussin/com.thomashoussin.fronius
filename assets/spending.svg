@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 32 40"
+   x="0px"
+   y="0px"
+   version="1.1"
+   id="svg16"
+   sodipodi:docname="spending.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata22">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>spending, expense, output, money, currency, finance</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs20" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     id="namedview18"
+     showgrid="false"
+     inkscape:zoom="12.6"
+     inkscape:cx="18.912787"
+     inkscape:cy="24.704465"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg16" />
+  <title
+     id="title2">spending, expense, output, money, currency, finance</title>
+  <g
+     data-name="23"
+     id="g10">
+    <path
+       d="M29.05,11.71a1,1,0,1,0-1.71,1A4.36,4.36,0,0,1,28,15a3.62,3.62,0,0,1,0,.43,4.54,4.54,0,0,1-.73,2l-.14.2A8.76,8.76,0,0,1,24.3,20l-.1,0-.1.05A17.2,17.2,0,0,1,16,22a17.2,17.2,0,0,1-8.1-1.88l-.1-.05L7.67,20A8.68,8.68,0,0,1,4.9,17.62l-.12-.17a4.59,4.59,0,0,1-.75-2A3.62,3.62,0,0,1,4,15c0-3.79,5.5-7,12-7a20.25,20.25,0,0,1,2.11.11,1,1,0,0,0,.21-2A22.15,22.15,0,0,0,16,6C8.15,6,2,10,2,15v6a5.56,5.56,0,0,0,0,.63,6.68,6.68,0,0,0,1.23,3.15,10.53,10.53,0,0,0,3.41,3A19.14,19.14,0,0,0,16,30a19.15,19.15,0,0,0,9.33-2.26,10.55,10.55,0,0,0,3.41-3A6.67,6.67,0,0,0,30,21.64,5.46,5.46,0,0,0,30,21V15A6.33,6.33,0,0,0,29.05,11.71Z"
+       id="path4" />
+    <path
+       d="M17,10a1,1,0,0,0-2,0,3,3,0,0,0,0,6v2H13a1,1,0,0,0,0,2h2a1,1,0,0,0,2,0,3,3,0,0,0,0-6V12h2a1,1,0,0,0,0-2Zm1,7a1,1,0,0,1-1,1V16A1,1,0,0,1,18,17Zm-3-3a1,1,0,0,1,0-2Z"
+       id="path6" />
+    <path
+       d="M22,8a1,1,0,0,0,.71-.29L24,6.41V12a1,1,0,0,0,2,0V6.41l1.29,1.29a1,1,0,0,0,1.41-1.41l-3-3a1,1,0,0,0-1.41,0l-3,3A1,1,0,0,0,22,8Z"
+       id="path8" />
+  </g>
+</svg>

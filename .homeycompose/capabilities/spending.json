@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Spending"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/spending.svg",
+  "units": {
+    "en": "€"
+  },
+  "decimals": 2
+}

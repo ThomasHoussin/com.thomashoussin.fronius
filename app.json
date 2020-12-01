@@ -244,6 +244,131 @@
       ]
     },
     {
+      "id": "performance",
+      "name": {
+        "en": "performance analyzer"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "meter_power.produced",
+        "meter_power.injected",
+        "meter_power.consumed",
+        "spending.day",
+        "savings.day"
+      ],
+      "capabilitiesOptions": {
+        "meter_power.consumed": {
+          "title": {
+            "en": "Energy consumed"
+          }
+        },
+        "meter_power.injected": {
+          "title": {
+            "en": "Energy injected"
+          }
+        },
+        "meter_power.produced": {
+          "title": {
+            "en": "Energy produced"
+          }
+        },
+        "spending.day": {
+          "title": {
+            "en": "Today spending"
+          }
+        },
+        "savings.day": {
+          "title": {
+            "en": "Today savings"
+          }
+        }
+      },
+      "energy": {
+        "cumulative": true
+      },
+      "images": {
+        "large": "/drivers/smartmeter/assets/images/large.png",
+        "small": "/drivers/smartmeter/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "enter_ip",
+          "next": "list_devices"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "enter_ip",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Request settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "Fronius Datamanager IP address"
+              }
+            },
+            {
+              "id": "DeviceId",
+              "type": "number",
+              "label": {
+                "en": "Fronius inverter DeviceId"
+              }
+            },
+            {
+              "id": "polling_interval",
+              "type": "number",
+              "value": 300,
+              "label": {
+                "en": "Polling interval for data collection, in seconds"
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Cost settings"
+          },
+          "children": [
+            {
+              "id": "purchaseprice",
+              "type": "number",
+              "value": 0.1765,
+              "label": {
+                "en": "Electricity purchase price per kwh"
+              }
+            },
+            {
+              "id": "sellprice",
+              "type": "number",
+              "value": 0.1,
+              "label": {
+                "en": "Electricity sell price per kwh"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "smartmeter",
       "name": {
         "en": "Smartmeter"
@@ -367,6 +492,32 @@
         "en": "Hz"
       },
       "decimals": 0
+    },
+    "savings": {
+      "type": "number",
+      "title": {
+        "en": "Savings"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/savings.svg",
+      "units": {
+        "en": "�"
+      },
+      "decimals": 2
+    },
+    "spending": {
+      "type": "number",
+      "title": {
+        "en": "Spending"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/spending.svg",
+      "units": {
+        "en": "�"
+      },
+      "decimals": 2
     }
   }
 }

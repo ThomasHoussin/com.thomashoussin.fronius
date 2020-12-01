@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.homeycompose",
+    "\\.homeycompose\\capabilities",
+    "\\drivers",
+    "\\drivers\\fronius-powerflow",
+    "\\drivers\\fronius-powerflow\\pair",
+    "\\drivers\\inverter",
+    "\\drivers\\performance",
+    "\\drivers\\performance\\assets",
+    "\\drivers\\performance\\pair",
+    "\\drivers\\smartmeter"
+  ],
+  "SelectedNode": "\\drivers\\performance\\device.js",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Savings"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/savings.svg",
+  "units": {
+    "en": "€"
+  },
+  "decimals": 2
+}
