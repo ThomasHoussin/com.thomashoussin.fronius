@@ -238,7 +238,7 @@
     {
       "id": "smartmeter",
       "name": {
-        "en": "smartmeter"
+        "en": "Smartmeter"
       },
       "class": "sensor",
       "capabilities": [
