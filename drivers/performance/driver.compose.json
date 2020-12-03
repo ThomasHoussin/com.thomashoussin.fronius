@@ -6,16 +6,16 @@
   "class": "sensor",
   "capabilities": [
     "meter_power.produced",
-    "meter_power.injected",
-    "meter_power.consumed",
+    "meter_power.toGrid",
+    "meter_power.fromGrid",
     "spending.day",
     "savings.day"
   ],
   "capabilitiesOptions": {
-    "meter_power.consumed": {
-      "title": { "en": "Energy consumed" }
+    "meter_power.fromGrid": {
+      "title": { "en": "Energy from grid" }
     },
-    "meter_power.injected": {
+    "meter_power.toGrid": {
       "title": { "en": "Energy injected" }
     },
     "meter_power.produced": {
@@ -32,8 +32,8 @@
     "cumulative": true
   },
   "images": {
-    "large": "/drivers/smartmeter/assets/images/large.png",
-    "small": "/drivers/smartmeter/assets/images/small.png"
+    "large": "/drivers/performance/assets/images/large.png",
+    "small": "/drivers/performance/assets/images/small.png"
   },
   "pair": [
     {
@@ -57,8 +57,9 @@
         {
           "id": "DeviceId",
           "type": "number",
+          "value":  -1,
           "label": {
-            "en": "Fronius inverter DeviceId"
+            "en": "Primary meter id"
           }
         },
         {

@@ -9,7 +9,6 @@
     "\\drivers\\inverter",
     "\\drivers\\performance",
     "\\drivers\\performance\\assets",
-    "\\drivers\\performance\\pair",
     "\\drivers\\smartmeter"
   ],
   "SelectedNode": "\\drivers\\performance\\device.js",

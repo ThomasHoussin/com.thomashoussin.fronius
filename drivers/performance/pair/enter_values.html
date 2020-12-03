@@ -15,9 +15,9 @@
             }, (err, result) => {
                 if (!err) {
                     let deviceDefinition = {
-                        name,
+                        name: name,
                         data: {},
-                        settings: { ip: hostname }
+                        settings: { ip: hostname, DeviceId: result }
                     };
 
                     Homey.createDevice(deviceDefinition, (error, result) => {

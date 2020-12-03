@@ -251,18 +251,18 @@
       "class": "sensor",
       "capabilities": [
         "meter_power.produced",
-        "meter_power.injected",
-        "meter_power.consumed",
+        "meter_power.toGrid",
+        "meter_power.fromGrid",
         "spending.day",
         "savings.day"
       ],
       "capabilitiesOptions": {
-        "meter_power.consumed": {
+        "meter_power.fromGrid": {
           "title": {
-            "en": "Energy consumed"
+            "en": "Energy from grid"
           }
         },
-        "meter_power.injected": {
+        "meter_power.toGrid": {
           "title": {
             "en": "Energy injected"
           }
@@ -287,28 +287,12 @@
         "cumulative": true
       },
       "images": {
-        "large": "/drivers/smartmeter/assets/images/large.png",
-        "small": "/drivers/smartmeter/assets/images/small.png"
+        "large": "/drivers/performance/assets/images/large.png",
+        "small": "/drivers/performance/assets/images/small.png"
       },
       "pair": [
         {
-          "id": "enter_ip",
-          "next": "list_devices"
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "prev": "enter_ip",
-            "next": "add_devices"
-          },
-          "options": {
-            "singular": false
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "enter_values"
         }
       ],
       "settings": [
@@ -328,8 +312,9 @@
             {
               "id": "DeviceId",
               "type": "number",
+              "value": -1,
               "label": {
-                "en": "Fronius inverter DeviceId"
+                "en": "Primary meter id"
               }
             },
             {
@@ -502,7 +487,7 @@
       "setable": false,
       "icon": "/assets/savings.svg",
       "units": {
-        "en": "�"
+        "en": "$"
       },
       "decimals": 2
     },
@@ -515,7 +500,7 @@
       "setable": false,
       "icon": "/assets/spending.svg",
       "units": {
-        "en": "�"
+        "en": "$"
       },
       "decimals": 2
     }

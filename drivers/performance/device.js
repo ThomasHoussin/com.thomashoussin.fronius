@@ -2,8 +2,10 @@
 
 const Homey = require('homey');
 const fetch = require('node-fetch');
+const cron = require('node-cron');
 
-const updatePath = '/solar_api/v1/GetArchiveData.cgi?';
+const updateArchivePath = '/solar_api/v1/GetArchiveData.cgi';
+
 const delay = s => new Promise(resolve => setTimeout(resolve, 1000 * s));
 
 class Performance extends Homey.Device {
@@ -13,8 +15,27 @@ class Performance extends Homey.Device {
   async onInit() {
       this.log('Performance has been initialized');
 
+      //get inverters list
+      let ip = this.getSetting('ip');
+
+      const updateUrl = `http://${ip}/solar_api/v1/GetInverterInfo.cgi`;
+      await fetch(updateUrl)
+          .then(checkResponseStatus)
+          .then(result => result.json())
+          .then(json => Object.keys(json.Body.Data))
+          .then(inverters => {
+              this.inverters = inverters;
+              console.log(inverters);
+          })
+          .catch(error => {
+              console.log('Error fetching inverters list');
+          });
+
       this.polling = true;
       this.addListener('poll', this.pollDevice);
+      this.addListener('everyday', this.everyday);
+      this.addListener('everymonth', this.everymonth);
+      this.addListener('updateCapabilities', this.updateCapabilities);
       // Enable device polling
       this.emit('poll');
   }
@@ -22,9 +43,27 @@ class Performance extends Homey.Device {
     async pollDevice() {
         while (this.polling) {
             console.log(`Updating Performance ${this.getName()}`);
-            this.updatePowerFlow();
+            this.updateData();
             await delay(this.getSetting('polling_interval'));
         }
+    }
+
+    async everyday() {
+        console.log(`Running everyday task for ${this.getName()}`);
+        this.setStoreValue("meter_power.toGrid.month", this.getStoreValue("meter_power.toGrid.month") + this.getStoreValue("meter_power.toGrid.today"));
+        this.setStoreValue("meter_power.fromGrid.month", this.getStoreValue("meter_power.fromGrid.month") + this.getStoreValue("meter_power.fromGrid.today"));
+        this.setStoreValue("meter_power.produced.month", this.getStoreValue("meter_power.produced.month") + this.getStoreValue("meter_power.produced.today"));
+
+        this.setStoreValue("meter_power.toGrid.today", 0);
+        this.setStoreValue("meter_power.fromGrid.today", 0);
+        this.setStoreValue("meter_power.produced.today", 0);
+    }
+
+    async everymonth() {
+        console.log(`Running everymonth task for ${this.getName()}`);
+        this.setStoreValue("meter_power.toGrid.month", 0);
+        this.setStoreValue("meter_power.fromGrid.month", 0);
+        this.setStoreValue("meter_power.produced.month", 0);
     }
 
   /**
@@ -63,44 +102,91 @@ class Performance extends Homey.Device {
       this.polling = false;
   }
 
-    updatePowerFlow() {
+    updateData() {
         let settings = this.getSettings();
 
-        let today = new Date();
-        let yesterday = new Date(today.getDate() - 1);
-        const end = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
-        const begin = `${yesterday.getDate()}.${yesterday.getMonth() + 1}.${yersterday.getFullYear()}`;
-        
-        const updateUrl = `http://${ip}${updatePath}Scope=System&Channel=EnergyReal_WAC_Sum_Produced&Channel=EnergyReal_WAC_Plus_Absolute&Channel=EnergyReal_WAC_Minus_Absolute&StartDate=${begin}&EndDate=${end}&SeriesType=DailySum`;
-        console.log(updateUrl);
+        let producedPower = -1;
+        let fromGridPower = -1;
+        let toGridPower = -1;
 
-        fetch(updateUrl)
+        let today = new Date();
+        let yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+
+        const end = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
+        const begin = `${yesterday.getDate()}.${yesterday.getMonth() + 1}.${yesterday.getFullYear()}`;
+
+        let invertersString = '';
+        for (let inv in this.inverters) {
+            invertersString += `DeviceId=${this.inverters[inv]}&`;
+        }
+
+        const updateUrlInv = `http://${settings.ip}${updateArchivePath}?Scope=Device&DeviceClass=Inverter&${invertersString}Channel=EnergyReal_WAC_Sum_Produced&StartDate=${begin}&EndDate=${end}&SeriesType=DailySum`;
+        console.log(updateUrlInv);
+
+        fetch(updateUrlInv)
             .then(checkResponseStatus)
             .then(result => result.json())
-            .then(json => this.updateValues(json.Body.Data.Site))
+            .then(json => Object.values(json.Body.Data))
+            .then(array => {
+                let total = 0;
+                for (let val in array) {
+                    console.log(array[val].Data.EnergyReal_WAC_Sum_Produced);
+                    total += ((typeof array[val].Data.EnergyReal_WAC_Sum_Produced == 'undefined' || array[val].Data.EnergyReal_WAC_Sum_Produced == null) ? 0 : array[val].Data.EnergyReal_WAC_Sum_Produced.Values['86400'] / 1000);
+                }
+                return total;
+            })
+            .then(power => {
+                this.setStoreValue("meter_power.produced.today", power)
+                    .then(value => this.emit('updateCapabilities'))
+                    .catch(error => {
+                        console.log(`Error when saving value produced`);
+                    });
+            })
             .catch(error => {
-                console.log(`Error when updating Performance ${this.getName()} on ${updateUrl}`);
+                console.log(`Error when updating EnergyReal_WAC_Sum_Produced in data ${this.getName()} on ${updateUrlInv}`);
             });
+        
+        const updateUrlMeter = `http://${settings.ip}${updateArchivePath}?Scope=Device&DeviceClass=meter&DeviceId=${settings.DeviceId}&Channel=EnergyReal_WAC_Plus_Absolute&Channel=EnergyReal_WAC_Minus_Absolute&StartDate=${begin}&EndDate=${end}&SeriesType=DailySum`;
+        console.log(updateUrlMeter);
+
+        fetch(updateUrlMeter)
+            .then(checkResponseStatus)
+            .then(result => result.json())
+            .then(json => Object.values(json.Body.Data)[0].Data)
+            .then(data => {
+                toGridPower = (typeof data.EnergyReal_WAC_Minus_Absolute == 'undefined' || data.EnergyReal_WAC_Minus_Absolute == null) ? 0 : data.EnergyReal_WAC_Minus_Absolute.Values['86400'] / 1000;
+                fromGridPower = (typeof data.EnergyReal_WAC_Plus_Absolute == 'undefined' || data.EnergyReal_WAC_Plus_Absolute == null) ? 0 : data.EnergyReal_WAC_Plus_Absolute.Values['86400'] / 1000;
+
+                this.setStoreValue("meter_power.fromGrid.today", fromGridPower)
+                    .then(value => this.setStoreValue("meter_power.toGrid.today", toGridPower))
+                    .then(value => this.emit('updateCapabilities'))
+                    .catch(error => {
+                        console.log(`Error when saving value fromgrid / togrid`);
+                    });
+            })
+            .catch(error => {
+                console.log(`Error when updating from Grid / to grid power in data ${this.getName()} on ${updateUrlMeter}`);
+            });
+
+
     }
 
-    updateValues(data) {
-        let pgrid = (typeof data.P_Grid == 'undefined' || data.P_Grid == null) ? 0 : data.P_Grid;
-        let pakku = (typeof data.P_Akku == 'undefined' || data.P_Akku == null) ? 0 : data.P_Akku;
+    async updateCapabilities() {
+        let settings = this.getSettings();
+        let toGridPower = this.getStoreValue("meter_power.toGrid.today");
+        let fromGridPower = this.getStoreValue("meter_power.fromGrid.today");
+        let producedPower = this.getStoreValue("meter_power.produced.today");
 
-        this.setCapabilityValue('measure_power.PV', (typeof data.P_PV == 'undefined' || data.P_PV == null) ? 0 : data.P_PV);
-        this.setCapabilityValue('measure_power.LOAD', (typeof data.P_Load == 'undefined' || data.P_Load == null) ? 0 : data.P_Load);
-        this.setCapabilityValue('measure_power.GRID', pgrid);
-        this.setCapabilityValue('measure_power.AKKU', pakku);
-
-      /* grid power + Akku power
-      IDKW, homey adds power produced by PV in the energy tab (see for example https://github.com/DiedB/Homey-SolarPanels/issues/128)
-      by using measure_power = grid power + akku power , the correct value should be displayed in energy tab assuming all PV power is used
-      */
-        this.setCapabilityValue('measure_power', pgrid + pakku);     
+        this.setCapabilityValue('meter_power.toGrid', toGridPower);
+        this.setCapabilityValue('meter_power.fromGrid', fromGridPower);
+        this.setCapabilityValue('meter_power.produced', producedPower);
+        this.setCapabilityValue('spending.day', fromGridPower * settings.purchaseprice);
+        this.setCapabilityValue('savings.day', toGridPower * settings.sellprice + (producedPower - toGridPower) * settings.purchaseprice);
     }
 }
 
-module.exports = PowerFlow ;
+module.exports = Performance ;
 
 function checkResponseStatus(res) {
     if (res.ok) {

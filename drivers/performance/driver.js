@@ -3,7 +3,7 @@
 const Homey = require('homey');
 const fetch = require('node-fetch');
 
-const checkPath = '/solar_api/v1/GetArchiveData.cgi?';
+const checkPath = '/solar_api/v1/GetMeterRealtimeData.cgi?Scope=System';
 
 class FroniusArchive extends Homey.Driver {
   /**
@@ -19,16 +19,25 @@ class FroniusArchive extends Homey.Driver {
         socket.on('validate', function (data, callback) {
             console.log("Validate new connection settings");
             let ip = data.host;
-            let today = new Date();
-            const end = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
 
-            const validationUrl = `http://${ip}${checkPath}Scope=System&Channel=EnergyReal_WAC_Sum_Produced&StartDate=${end}&EndDate=${end}&SeriesType=DailySum`;
+            const validationUrl = `http://${ip}${checkPath}`;
             console.log(validationUrl);
 
             fetch(validationUrl)
                 .then(checkResponseStatus)
+                .then(result => result.json())
+                .then(json => json.Body.Data)
+                .then(data => {
+                    for (var id in data) {
+                        if (data.hasOwnProperty(id) && (data[id].Meter_Location_Current == 0 || data[id].Meter_Location_Current == 1)) {
+                            //should be the primary meter
+                            return parseInt(id,10);
+                        }
+                    };
+                    callback(new Error(Homey.__('no primary meter found')));
+                })
                 .then(res => {
-                    callback(false, 'ok')
+                    callback(false, res)
                 })
                 .catch(error => {
                     callback(new Error(Homey.__('ip_error')));

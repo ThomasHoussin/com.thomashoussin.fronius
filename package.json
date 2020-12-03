@@ -4,7 +4,8 @@
   "main": "app.js",
   "dependencies": {
     "node-fetch": "^2.6.1",
-    "he": "^1.2.0"
+    "he": "^1.2.0",
+    "node-cron": "^2.0.3"
   },
   "devDependencies": {
     "homey": "^2.9.2"

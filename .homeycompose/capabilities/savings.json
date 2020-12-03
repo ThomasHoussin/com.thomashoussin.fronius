@@ -7,7 +7,7 @@
   "setable": false,
   "icon": "/assets/savings.svg",
   "units": {
-    "en": "€"
+    "en": "$"
   },
   "decimals": 2
 }
