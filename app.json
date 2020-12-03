@@ -301,9 +301,6 @@
           }
         }
       },
-      "energy": {
-        "cumulative": true
-      },
       "images": {
         "large": "/drivers/performance/assets/images/large.png",
         "small": "/drivers/performance/assets/images/small.png"
