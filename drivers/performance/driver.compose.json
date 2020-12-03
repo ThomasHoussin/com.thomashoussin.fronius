@@ -9,7 +9,10 @@
     "meter_power.toGrid",
     "meter_power.fromGrid",
     "spending.day",
-    "savings.day"
+    "savings.day",
+    "spending.month",
+    "savings.month",
+    "spending.previousmonth"
   ],
   "capabilitiesOptions": {
     "meter_power.fromGrid": {
@@ -26,10 +29,16 @@
     },
     "savings.day": {
       "title": { "en": "Today savings" }
+    },
+    "spending.month": {
+      "title": { "en": "Month spending" }
+    },
+    "spending.previousmonth": {
+      "title": { "en": "Previous month spending" }
+    },
+    "savings.month": {
+      "title": { "en": "Month savings" }
     }
-  },
-  "energy": {
-    "cumulative": true
   },
   "images": {
     "large": "/drivers/performance/assets/images/large.png",

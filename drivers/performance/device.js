@@ -36,6 +36,17 @@ class Performance extends Homey.Device {
       this.addListener('everyday', this.everyday);
       this.addListener('everymonth', this.everymonth);
       this.addListener('updateCapabilities', this.updateCapabilities);
+
+      //everyday except 1st day of the mont
+      this.dailycron = cron.schedule('0 0 2-31 * *', () => {
+          this.emit('everyday');
+      });
+
+      //every month
+      this.monthlycron = cron.schedule('0 0 1 * *', () => {
+          this.emit('everymonth');
+      });
+
       // Enable device polling
       this.emit('poll');
   }
@@ -50,17 +61,20 @@ class Performance extends Homey.Device {
 
     async everyday() {
         console.log(`Running everyday task for ${this.getName()}`);
-        this.setStoreValue("meter_power.toGrid.month", this.getStoreValue("meter_power.toGrid.month") + this.getStoreValue("meter_power.toGrid.today"));
-        this.setStoreValue("meter_power.fromGrid.month", this.getStoreValue("meter_power.fromGrid.month") + this.getStoreValue("meter_power.fromGrid.today"));
-        this.setStoreValue("meter_power.produced.month", this.getStoreValue("meter_power.produced.month") + this.getStoreValue("meter_power.produced.today"));
-
-        this.setStoreValue("meter_power.toGrid.today", 0);
-        this.setStoreValue("meter_power.fromGrid.today", 0);
-        this.setStoreValue("meter_power.produced.today", 0);
+        this.setStoreValue("meter_power.toGrid.month", this.getStoreValue("meter_power.toGrid.month") + this.getStoreValue("meter_power.toGrid.today"))
+            .then(this.setStoreValue("meter_power.toGrid.today", 0));
+        this.setStoreValue("meter_power.fromGrid.month", this.getStoreValue("meter_power.fromGrid.month") + this.getStoreValue("meter_power.fromGrid.today"))
+            .then(this.setStoreValue("meter_power.fromGrid.today", 0));
+        this.setStoreValue("meter_power.produced.month", this.getStoreValue("meter_power.produced.month") + this.getStoreValue("meter_power.produced.today"))
+            .then(this.setStoreValue("meter_power.produced.today", 0));
+  
     }
 
     async everymonth() {
         console.log(`Running everymonth task for ${this.getName()}`);
+        await this.everyday();
+        await this.setStoreValue("meter_power.fromGrid.previousmonth", this.getStoreValue("meter_power.toGrid.month"));
+
         this.setStoreValue("meter_power.toGrid.month", 0);
         this.setStoreValue("meter_power.fromGrid.month", 0);
         this.setStoreValue("meter_power.produced.month", 0);
@@ -100,6 +114,8 @@ class Performance extends Homey.Device {
   async onDeleted() {
       this.log('Performance has been deleted');
       this.polling = false;
+      this.dailycron.destroy();
+      this.monthlycron.destroy();
   }
 
     updateData() {
@@ -183,6 +199,15 @@ class Performance extends Homey.Device {
         this.setCapabilityValue('meter_power.produced', producedPower);
         this.setCapabilityValue('spending.day', fromGridPower * settings.purchaseprice);
         this.setCapabilityValue('savings.day', toGridPower * settings.sellprice + (producedPower - toGridPower) * settings.purchaseprice);
+
+        let toGridPowerMonth = this.getStoreValue("meter_power.toGrid.month");
+        let fromGridPowerMonth = this.getStoreValue("meter_power.fromGrid.month");
+        let producedPowerMonth = this.getStoreValue("meter_power.produced.month");
+        this.setCapabilityValue('spending.month', fromGridPowerMonth * settings.purchaseprice);
+        this.setCapabilityValue('savings.month', toGridPowerMonth * settings.sellprice + (producedPowerMonth - toGridPowerMonth) * settings.purchaseprice);
+
+        let fromGridPowerPreviousMonth = this.getStoreValue("meter_power.fromGrid.previousmonth");
+        this.setCapabilityValue('spending.previousmonth', fromGridPowerPreviousMonth * settings.purchaseprice );
     }
 }
 
