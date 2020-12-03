@@ -14,6 +14,8 @@ Feel free to donate to  support the project !
 
 # Version History
 
+### v0.0.6
+	- Add settings for cumulative
 ### v0.0.5
 	- New Smart Meter driver
 ### v0.0.4
