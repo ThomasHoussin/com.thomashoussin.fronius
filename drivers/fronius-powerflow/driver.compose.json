@@ -60,6 +60,14 @@
           }
         }
       ]
+    },
+    {
+      "id": "cumulative",
+      "type": "checkbox",
+      "value": true,
+      "label": {
+        "en": "Report Cumulative in homey"
+      }
     }
   ]
 }

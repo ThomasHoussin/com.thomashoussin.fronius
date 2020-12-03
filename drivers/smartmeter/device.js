@@ -45,6 +45,7 @@ class Smartmeter extends Homey.Device {
    */
   async onSettings({ oldSettings, newSettings, changedKeys }) {
       this.log('Smartmeter settings where changed');
+      this.setEnergy({ cumulative: newSettings.cumulative });
   }
 
   /**

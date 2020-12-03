@@ -114,6 +114,14 @@
               }
             }
           ]
+        },
+        {
+          "id": "cumulative",
+          "type": "checkbox",
+          "value": true,
+          "label": {
+            "en": "Report Cumulative in homey"
+          }
         }
       ]
     },
@@ -305,6 +313,14 @@
         }
       ],
       "settings": [
+        {
+          "id": "cumulative",
+          "type": "checkbox",
+          "value": true,
+          "label": {
+            "en": "Report Cumulative in homey"
+          }
+        },
         {
           "type": "group",
           "label": {
