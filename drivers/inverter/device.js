@@ -17,7 +17,6 @@ class Inverter extends Homey.Device {
       this.addListener('poll', this.pollDevice);
       // Enable device polling
       this.emit('poll');
-      //this.updateInverter();
   }
 
     async pollDevice() {

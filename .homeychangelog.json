@@ -10,5 +10,8 @@
   },
   "0.0.6": {
     "en": "Add settings for cumulative"
+  },
+  "0.0.7": {
+    "en": "Add reporting app (reports costs, savings, self-consumption rate, etc.), new iconse"
   }
 }

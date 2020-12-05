@@ -12,5 +12,9 @@ Developers
    
 Other
 ----------
-* PowerFlow icon : Electric Meter by Creative Stall from the Noun Project
-* Frequecny capability icon : frequency by Andrejs Kirma from the Noun Project
+* Smartmeter icon : Volt Meter by Vectorstall from the Noun Project
+* Frequency capability icon : frequency by Andrejs Kirma from the Noun Project
+* Savings capability icon : by Blair Adams from the Noun Project
+* Spending capability icon :  by Kantor Tegalsari from the Noun Project
+* Reporting icon : Data by Adrien Coquet from the Noun Project
+* Power Flo : flow by Andrejs Kirma from the Noun Project

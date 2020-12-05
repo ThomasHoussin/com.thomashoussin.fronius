@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thomashoussin.fronius",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "compatibility": ">=3.1.0",
   "sdk": 2,
   "name": {
@@ -244,6 +244,163 @@
       ]
     },
     {
+      "id": "reporting",
+      "name": {
+        "en": "performance analyzer"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "meter_power.produced",
+        "meter_power.toGrid",
+        "meter_power.fromGrid",
+        "selfconsumption",
+        "selfconsumption.month",
+        "spending.day",
+        "savings.day",
+        "spending.month",
+        "savings.month",
+        "spending.previousmonth",
+        "button.recoverHistory",
+        "button.resetHistory"
+      ],
+      "capabilitiesOptions": {
+        "meter_power.fromGrid": {
+          "title": {
+            "en": "Energy from grid"
+          }
+        },
+        "meter_power.toGrid": {
+          "title": {
+            "en": "Energy injected"
+          }
+        },
+        "meter_power.produced": {
+          "title": {
+            "en": "Energy produced"
+          }
+        },
+        "selfconsumption": {
+          "title": {
+            "en": "Self-consumption rate"
+          }
+        },
+        "selfconsumption.month": {
+          "title": {
+            "en": "Month self-consumption rate"
+          }
+        },
+        "spending.day": {
+          "title": {
+            "en": "Today spending"
+          }
+        },
+        "savings.day": {
+          "title": {
+            "en": "Today savings"
+          }
+        },
+        "spending.month": {
+          "title": {
+            "en": "Month spending"
+          }
+        },
+        "spending.previousmonth": {
+          "title": {
+            "en": "Previous month spending"
+          }
+        },
+        "savings.month": {
+          "title": {
+            "en": "Month savings"
+          }
+        },
+        "button.recoverHistory": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Recover history"
+          },
+          "desc": {
+            "en": "This will try to get historical data from Fronius datamanager (click once, this may take a while)"
+          }
+        },
+        "button.resetHistory": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reset history"
+          },
+          "desc": {
+            "en": "This will reset current month values to 0"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/performance/assets/images/large.png",
+        "small": "/drivers/performance/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "enter_values"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Request settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "Fronius Datamanager IP address"
+              }
+            },
+            {
+              "id": "DeviceId",
+              "type": "number",
+              "value": -1,
+              "label": {
+                "en": "Primary meter id"
+              }
+            },
+            {
+              "id": "polling_interval",
+              "type": "number",
+              "value": 300,
+              "label": {
+                "en": "Polling interval for data collection, in seconds"
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Cost settings"
+          },
+          "children": [
+            {
+              "id": "purchaseprice",
+              "type": "number",
+              "value": 0.1765,
+              "label": {
+                "en": "Electricity purchase price per kwh"
+              }
+            },
+            {
+              "id": "sellprice",
+              "type": "number",
+              "value": 0.1,
+              "label": {
+                "en": "Electricity sell price per kwh"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "smartmeter",
       "name": {
         "en": "Smartmeter"
@@ -367,6 +524,45 @@
         "en": "Hz"
       },
       "decimals": 0
+    },
+    "savings": {
+      "type": "number",
+      "title": {
+        "en": "Savings"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/savings.svg",
+      "units": {
+        "en": "$"
+      },
+      "decimals": 2
+    },
+    "selfconsumption": {
+      "type": "number",
+      "title": {
+        "en": "Self-consumption rate"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/selfconsumption.svg",
+      "units": {
+        "en": "%"
+      },
+      "decimals": 1
+    },
+    "spending": {
+      "type": "number",
+      "title": {
+        "en": "Spending"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/spending.svg",
+      "units": {
+        "en": "$"
+      },
+      "decimals": 2
     }
   }
 }
