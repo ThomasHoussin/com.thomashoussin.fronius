@@ -7,6 +7,7 @@ After installing the app, three possibilities are available :
 * Inverter : shows for every inverter PV power, daily/yearly/total Production, AC/DC current and AC/DC voltage. PV power is reported in energy tab
 * Smartmeter : shows current, voltage, frequency, power and energy (produced/injected) for every smartmeter
 * PowerFlow : shows for the site PV, Grid, Load and Akku power. Load is reported in energy tab. 
+* Reporting : adds a reporting app that shows costs, savings, self-consumption rate, etc.
 
 ## Donations
 Feel free to donate to  support the project !
