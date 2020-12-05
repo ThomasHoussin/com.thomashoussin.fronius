@@ -42,8 +42,9 @@ class PowerFlow extends Homey.Device {
    * @param {string[]} event.changedKeys An array of keys changed since the previous version
    * @returns {Promise<string|void>} return a custom message that will be displayed
    */
-  async onSettings({ oldSettings, newSettings, changedKeys }) {
+  async onSettings( oldSettings, newSettings, changedKeys ) {
       this.log('PowerFlow settings where changed');
+      this.setEnergy({ cumulative: newSettings.cumulative });
   }
 
   /**

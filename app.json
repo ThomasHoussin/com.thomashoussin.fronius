@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thomashoussin.fronius",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "compatibility": ">=3.1.0",
   "sdk": 2,
   "name": {
@@ -32,6 +32,17 @@
     "name": "Thomas Houssin",
     "email": "thomas.houssin@gmail.com"
   },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "thomas.houssin@gmail.com"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/ThomasHoussin/com.thomashoussin.fronius/issues"
+  },
+  "source": "https://github.com/ThomasHoussin/com.thomashoussin.fronius",
   "drivers": [
     {
       "id": "fronius-powerflow",
@@ -82,18 +93,34 @@
       ],
       "settings": [
         {
-          "id": "ip",
-          "type": "text",
+          "type": "group",
           "label": {
-            "en": "Fronius Datamanager IP address"
-          }
+            "en": "Request settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "Fronius Datamanager IP address"
+              }
+            },
+            {
+              "id": "polling_interval",
+              "type": "number",
+              "value": 60,
+              "label": {
+                "en": "Polling interval in seconds"
+              }
+            }
+          ]
         },
         {
-          "id": "polling_interval",
-          "type": "number",
-          "value": 60,
+          "id": "cumulative",
+          "type": "checkbox",
+          "value": true,
           "label": {
-            "en": "Polling interval for data collection, in seconds"
+            "en": "Make cumulative in Energy tab"
           }
         }
       ]
@@ -178,35 +205,168 @@
       ],
       "settings": [
         {
-          "id": "ip",
-          "type": "text",
+          "type": "group",
           "label": {
-            "en": "Fronius Datamanager IP address"
-          }
-        },
-        {
-          "id": "DeviceId",
-          "type": "number",
-          "label": {
-            "en": "Fronius inverter DeviceId"
-          }
+            "en": "Request settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "Fronius Datamanager IP address"
+              }
+            },
+            {
+              "id": "DeviceId",
+              "type": "number",
+              "label": {
+                "en": "Fronius inverter DeviceId"
+              }
+            },
+            {
+              "id": "polling_interval",
+              "type": "number",
+              "value": 60,
+              "label": {
+                "en": "Polling interval in seconds"
+              }
+            }
+          ]
         },
         {
           "id": "PVPower",
           "type": "number",
           "label": {
-            "en": "PV power connected to this inverter (in watts)"
+            "en": "PV power connected (in watts)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "smartmeter",
+      "name": {
+        "en": "Smartmeter"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_power",
+        "measure_current",
+        "measure_voltage",
+        "measure_frequency",
+        "meter_power",
+        "meter_power.injected"
+      ],
+      "capabilitiesOptions": {
+        "meter_power": {
+          "title": {
+            "en": "Energy consumed"
+          }
+        },
+        "meter_power.injected": {
+          "title": {
+            "en": "Energy injected"
+          }
+        },
+        "measure_current": {
+          "title": {
+            "en": "Current"
+          }
+        },
+        "measure_voltage": {
+          "title": {
+            "en": "Voltage"
+          }
+        },
+        "measure_frequency": {
+          "title": {
+            "en": "Phase frequency"
+          }
+        }
+      },
+      "energy": {
+        "cumulative": true
+      },
+      "images": {
+        "large": "/drivers/smartmeter/assets/images/large.png",
+        "small": "/drivers/smartmeter/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "enter_ip",
+          "next": "list_devices"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "enter_ip",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
           }
         },
         {
-          "id": "polling_interval",
-          "type": "number",
-          "value": 60,
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
           "label": {
-            "en": "Polling interval for data collection, in seconds"
+            "en": "Request settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "Fronius Datamanager IP address"
+              }
+            },
+            {
+              "id": "DeviceId",
+              "type": "number",
+              "label": {
+                "en": "Fronius inverter DeviceId"
+              }
+            },
+            {
+              "id": "polling_interval",
+              "type": "number",
+              "value": 60,
+              "label": {
+                "en": "Polling interval for data collection, in seconds"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cumulative",
+          "type": "checkbox",
+          "value": true,
+          "label": {
+            "en": "Make cumulative in Energy tab"
           }
         }
       ]
     }
-  ]
+  ],
+  "capabilities": {
+    "measure_frequency": {
+      "type": "number",
+      "title": {
+        "en": "Phase frequency"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/frequency.svg",
+      "units": {
+        "en": "Hz"
+      },
+      "decimals": 0
+    }
+  }
 }

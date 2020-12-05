@@ -4,5 +4,11 @@
   },
   "0.0.4": {
     "en": "Update drivers images, fixed README.txt"
+  },
+  "0.0.5": {
+    "en": "New Smart Meter driver"
+  },
+  "0.0.6": {
+    "en": "Add settings for cumulative"
   }
 }
