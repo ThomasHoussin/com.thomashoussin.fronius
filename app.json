@@ -257,7 +257,9 @@
         "savings.day",
         "spending.month",
         "savings.month",
-        "spending.previousmonth"
+        "spending.previousmonth",
+        "button.recoverHistory",
+        "button.resetHistory"
       ],
       "capabilitiesOptions": {
         "meter_power.fromGrid": {
@@ -298,6 +300,24 @@
         "savings.month": {
           "title": {
             "en": "Month savings"
+          }
+        },
+        "button.recoverHistory": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Recover history"
+          },
+          "desc": {
+            "en": "This will try to get historical data from Fronius datamanager"
+          }
+        },
+        "button.resetHistory": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reset history"
+          },
+          "desc": {
+            "en": "This will reset current month values to 0"
           }
         }
       },
