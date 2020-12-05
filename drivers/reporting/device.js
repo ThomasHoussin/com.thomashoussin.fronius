@@ -305,16 +305,19 @@ class Reporting extends Homey.Device {
         let toGridPower = this.getStoreValue("meter_power.toGrid.today");
         let fromGridPower = this.getStoreValue("meter_power.fromGrid.today");
         let producedPower = this.getStoreValue("meter_power.produced.today");
+        let toGridPowerMonth = this.getStoreValue("meter_power.toGrid.month");
+        let fromGridPowerMonth = this.getStoreValue("meter_power.fromGrid.month");
+        let producedPowerMonth = this.getStoreValue("meter_power.produced.month");
 
         this.setCapabilityValue('meter_power.toGrid', toGridPower);
         this.setCapabilityValue('meter_power.fromGrid', fromGridPower);
         this.setCapabilityValue('meter_power.produced', producedPower);
+        this.setCapabilityValue('selfconsumption', (producedPower - toGridPower) / producedPower * 100) ;
+        this.setCapabilityValue('selfconsumption.month', (producedPowerMonth - toGridPowerMonth) / producedPowerMonth * 100) ;
+
         this.setCapabilityValue('spending.day', fromGridPower * settings.purchaseprice);
         this.setCapabilityValue('savings.day', toGridPower * settings.sellprice + (producedPower - toGridPower) * settings.purchaseprice);
 
-        let toGridPowerMonth = this.getStoreValue("meter_power.toGrid.month");
-        let fromGridPowerMonth = this.getStoreValue("meter_power.fromGrid.month");
-        let producedPowerMonth = this.getStoreValue("meter_power.produced.month");
         this.setCapabilityValue('spending.month', fromGridPowerMonth * settings.purchaseprice + fromGridPower * settings.purchaseprice);
         this.setCapabilityValue('savings.month', toGridPowerMonth * settings.sellprice + (producedPowerMonth - toGridPowerMonth) * settings.purchaseprice +
                                                     toGridPower * settings.sellprice + (producedPower - toGridPower) * settings.purchaseprice);

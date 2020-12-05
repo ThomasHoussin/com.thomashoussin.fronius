@@ -8,6 +8,8 @@
     "meter_power.produced",
     "meter_power.toGrid",
     "meter_power.fromGrid",
+    "selfconsumption",
+    "selfconsumption.month",
     "spending.day",
     "savings.day",
     "spending.month",
@@ -25,6 +27,12 @@
     },
     "meter_power.produced": {
       "title": { "en": "Energy produced" }
+    },
+    "selfconsumption": {
+      "title": { "en": "Self-consumption rate" }
+    },
+    "selfconsumption.month": {
+      "title": { "en": "Month self-consumption rate" }
     },
     "spending.day": {
       "title": { "en": "Today spending" }
@@ -47,7 +55,7 @@
         "en": "Recover history"
       },
       "desc": {
-        "en": "This will try to get historical data from Fronius datamanager"
+        "en": "This will try to get historical data from Fronius datamanager (click once, this may take a while)"
       }
     },
     "button.resetHistory": {

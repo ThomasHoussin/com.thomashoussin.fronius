@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Self-consumption rate"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/selfconsumption.svg",
+  "units": {
+    "en": "%"
+  },
+  "decimals": 1
+}

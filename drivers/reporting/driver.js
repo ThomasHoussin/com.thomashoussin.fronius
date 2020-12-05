@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 
 const checkPath = '/solar_api/v1/GetMeterRealtimeData.cgi?Scope=System';
 
-class FroniusArchive extends Homey.Driver {
+class FroniusReporting extends Homey.Driver {
   /**
    * onInit is called when the driver is initialized.
    */
@@ -46,7 +46,7 @@ class FroniusArchive extends Homey.Driver {
     }
 }
 
-module.exports = FroniusArchive;
+module.exports = FroniusReporting;
 
 function checkResponseStatus(res) {
     if (res.ok) {
