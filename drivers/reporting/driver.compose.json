@@ -69,8 +69,8 @@
     }
   },
   "images": {
-    "large": "/drivers/performance/assets/images/large.png",
-    "small": "/drivers/performance/assets/images/small.png"
+    "large": "/drivers/reporting/assets/images/large.png",
+    "small": "/drivers/reporting/assets/images/small.png"
   },
   "pair": [
     {
