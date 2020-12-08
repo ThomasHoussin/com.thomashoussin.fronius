@@ -12,6 +12,9 @@
     "en": "Add settings for cumulative"
   },
   "0.0.7": {
-    "en": "Add reporting app (reports costs, savings, self-consumption rate, etc.), new iconse"
+    "en": "Add reporting app (reports costs, savings, self-consumption rate, etc.), new icons"
+  },
+  "0.0.8": {
+    "en": "Update driver name"
   }
 }

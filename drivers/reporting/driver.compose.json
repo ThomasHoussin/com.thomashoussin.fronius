@@ -1,7 +1,7 @@
 {
-  "id": "performance",
+  "id": "reporting",
   "name": {
-    "en": "performance analyzer"
+    "en": "reporting"
   },
   "class": "sensor",
   "capabilities": [
