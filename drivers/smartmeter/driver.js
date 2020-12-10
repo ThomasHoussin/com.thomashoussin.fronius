@@ -3,7 +3,7 @@
 const Homey = require('homey');
 const fetch = require('node-fetch');
 
-const checkPath = '/solar_api/v1/GetOhmPilotRealtimeData.cgi?Scope=System';
+const checkPath = '/solar_api/v1/GetMeterRealtimeData.cgi?Scope=System';
 
 class FroniusSmartmeter extends Homey.Driver {
     /**
