@@ -17,4 +17,6 @@ Other
 * Savings capability icon : by Blair Adams from the Noun Project
 * Spending capability icon :  by Kantor Tegalsari from the Noun Project
 * Reporting icon : Data by Adrien Coquet from the Noun Project
-* Power Flo : flow by Andrejs Kirma from the Noun Project
+* Power Flow : flow by Andrejs Kirma from the Noun Project
+* OhmPilot : Rheostat by Knut M. Synstad from the Noun Project
+* status capability : Information by Royyan Wijaya from the Noun Project

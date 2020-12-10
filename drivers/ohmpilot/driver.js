@@ -5,14 +5,13 @@ const fetch = require('node-fetch');
 
 const checkPath = '/solar_api/v1/GetOhmPilotRealtimeData.cgi?Scope=System';
 
-class FroniusSmartmeter extends Homey.Driver {
+class OhmpilotDriver extends Homey.Driver {
     /**
      * onInit is called when the driver is initialized.
      */
     async onInit() {
-        this.log('Fronius has been initialized');
+        this.log('OhmPilot has been initialized');
     }
-
 
     onPair(socket) {
         var devices ;
@@ -54,7 +53,7 @@ class FroniusSmartmeter extends Homey.Driver {
     }
 }
 
-module.exports = FroniusSmartmeter;
+module.exports = OhmpilotDriver;
 
 function checkResponseStatus(res) {
     if (res.ok) {
@@ -65,15 +64,15 @@ function checkResponseStatus(res) {
     }
 }
 
-function meterToDevice(json, ip, DeviceId) {
+function ohmpilotToDevice(json, ip, DeviceId) {
     let device = {
-        name: json.Details.Model,
+        name: `${json.Details.Model}-${json.Details.Serial}`,
         settings: {
             ip: ip,
             DeviceId: parseInt(DeviceId, 10),
         },
         data: {
-            id: json.Details.Serial,
+            id: json.Serial,
         }
     };
     console.log(device);
@@ -84,7 +83,7 @@ function buildDevices(json,ip) {
     var devices = [];
     for (var id in json) {
         if (json.hasOwnProperty(id)) {
-            devices.push(meterToDevice(json[id],ip,id));
+            devices.push(ohmpilotToDevice(json[id],ip,id));
         }
     };
     return devices;    
