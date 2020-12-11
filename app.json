@@ -244,6 +244,93 @@
       ]
     },
     {
+      "id": "ohmpilot",
+      "name": {
+        "en": "Ohmpilot"
+      },
+      "class": "heater",
+      "capabilities": [
+        "meter_power",
+        "measure_power",
+        "measure_temperature",
+        "ohmpilotstate"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "title": {
+            "en": "Actual power consumption"
+          }
+        },
+        "meter_power": {
+          "title": {
+            "en": "Total consumed energy"
+          }
+        },
+        "measure_temperature": {
+          "title": {
+            "en": "Temperature from sensor"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ohmpilot/assets/images/large.png",
+        "small": "/drivers/ohmpilot/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "enter_ip",
+          "next": "list_devices"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "enter_ip",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Request settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "Fronius Datamanager IP address"
+              }
+            },
+            {
+              "id": "DeviceId",
+              "type": "number",
+              "label": {
+                "en": "Fronius ohmpilot DeviceId"
+              }
+            },
+            {
+              "id": "polling_interval",
+              "type": "number",
+              "value": 60,
+              "label": {
+                "en": "Polling interval in seconds"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "reporting",
       "name": {
         "en": "reporting"
@@ -509,6 +596,113 @@
           }
         }
       ]
+    },
+    {
+      "id": "storage",
+      "name": {
+        "en": "storage"
+      },
+      "class": "solarpanel",
+      "capabilities": [
+        "measure_power",
+        "measure_current",
+        "measure_voltage",
+        "measure_battery",
+        "meter_power",
+        "measure_temperature"
+      ],
+      "capabilitiesOptions": {
+        "meter_power": {
+          "title": {
+            "en": "Current maximum capacity"
+          }
+        },
+        "measure_current": {
+          "title": {
+            "en": "Battery output current"
+          }
+        },
+        "measure_voltage": {
+          "title": {
+            "en": "Battery output voltage"
+          }
+        },
+        "measure_temperature": {
+          "title": {
+            "en": "Temperature"
+          }
+        },
+        "measure_battery": {
+          "title": {
+            "en": "Relative charged capacity"
+          }
+        },
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "energy": {
+        "batteries": [
+          "INTERNAL"
+        ]
+      },
+      "images": {
+        "large": "/drivers/storage/assets/images/large.png",
+        "small": "/drivers/storage/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "enter_ip",
+          "next": "list_devices"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "enter_ip",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Request settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "Fronius Datamanager IP address"
+              }
+            },
+            {
+              "id": "DeviceId",
+              "type": "number",
+              "label": {
+                "en": "Fronius inverter DeviceId"
+              }
+            },
+            {
+              "id": "polling_interval",
+              "type": "number",
+              "value": 60,
+              "label": {
+                "en": "Polling interval in seconds"
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "capabilities": {
@@ -524,6 +718,59 @@
         "en": "Hz"
       },
       "decimals": 0
+    },
+    "ohmpilotstate": {
+      "type": "enum",
+      "title": {
+        "en": "OhmPilot state"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/information.svg",
+      "values": [
+        {
+          "id": "up",
+          "title": {
+            "en": "Up and running"
+          }
+        },
+        {
+          "id": "keepmin",
+          "title": {
+            "en": "Keep minimum temperature"
+          }
+        },
+        {
+          "id": "legionella",
+          "title": {
+            "en": "Legionella protection"
+          }
+        },
+        {
+          "id": "critical",
+          "title": {
+            "en": "Critical fault"
+          }
+        },
+        {
+          "id": "fault",
+          "title": {
+            "en": "Fault"
+          }
+        },
+        {
+          "id": "boost",
+          "title": {
+            "en": "Boost mode"
+          }
+        },
+        {
+          "id": "unkown",
+          "title": {
+            "en": "Unknown state"
+          }
+        }
+      ]
     },
     "savings": {
       "type": "number",

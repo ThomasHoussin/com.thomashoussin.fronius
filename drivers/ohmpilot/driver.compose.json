@@ -1,0 +1,81 @@
+{
+  "id": "ohmpilot",
+  "name": {
+    "en": "Ohmpilot"
+  },
+  "class": "heater",
+  "capabilities": [
+    "meter_power",
+    "measure_power",
+    "measure_temperature",
+    "ohmpilotstate"
+  ],
+  "capabilitiesOptions": {
+    "measure_power": {
+      "title": { "en": "Actual power consumption" }
+    },
+    "meter_power": {
+      "title": { "en": "Total consumed energy" }
+    },
+    "measure_temperature": {
+      "title": { "en": "Temperature from sensor" }
+    }
+  },
+  "images": {
+    "large": "/drivers/ohmpilot/assets/images/large.png",
+    "small": "/drivers/ohmpilot/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "enter_ip",
+      "next": "list_devices"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "prev": "enter_ip",
+        "next": "add_devices"
+      },
+      "options": {
+        "singular": false
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Request settings"
+      },
+      "children": [
+        {
+          "id": "ip",
+          "type": "text",
+          "label": {
+            "en": "Fronius Datamanager IP address"
+          }
+        },
+        {
+          "id": "DeviceId",
+          "type": "number",
+          "label": {
+            "en": "Fronius ohmpilot DeviceId"
+          }
+        },
+        {
+          "id": "polling_interval",
+          "type": "number",
+          "value": 60,
+          "label": {
+            "en": "Polling interval in seconds"
+          }
+        }
+      ]
+    }
+  ]
+}
