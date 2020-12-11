@@ -1,0 +1,95 @@
+{
+  "id": "storage",
+  "name": {
+    "en": "storage"
+  },
+  "class": "solarpanel",
+  "capabilities": [
+    "measure_power",
+    "measure_current",
+    "measure_voltage",
+    "measure_battery",
+    "meter_power",
+    "measure_temperature"
+  ],
+  "capabilitiesOptions": {
+    "meter_power": {
+      "title": { "en": "Current maximum capacity" }
+    },
+    "measure_current": {
+      "title": { "en": "Battery output current" }
+    },
+    "measure_voltage": {
+      "title": { "en": "Battery output voltage" }
+    },
+    "measure_temperature": {
+      "title": { "en": "Temperature" }
+    },
+    "measure_battery": {
+      "title": { "en": "Relative charged capacity" }
+    },
+    "measure_power": {
+      "approximated": true
+    }
+  },
+  "energy": {
+    "batteries": [ "INTERNAL" ]
+  },
+  "images": {
+    "large": "/drivers/storage/assets/images/large.png",
+    "small": "/drivers/storage/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "enter_ip",
+      "next": "list_devices"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "prev": "enter_ip",
+        "next": "add_devices"
+      },
+      "options": {
+        "singular": false
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Request settings"
+      },
+      "children": [
+        {
+          "id": "ip",
+          "type": "text",
+          "label": {
+            "en": "Fronius Datamanager IP address"
+          }
+        },
+        {
+          "id": "DeviceId",
+          "type": "number",
+          "label": {
+            "en": "Fronius inverter DeviceId"
+          }
+        },
+        {
+          "id": "polling_interval",
+          "type": "number",
+          "value": 60,
+          "label": {
+            "en": "Polling interval in seconds"
+          }
+        }
+      ]
+    }
+  ]
+}

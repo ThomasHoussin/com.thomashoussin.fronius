@@ -3,18 +3,18 @@
 const Homey = require('homey');
 const fetch = require('node-fetch');
 
-const checkPath = '/solar_api/v1/GetOhmPilotRealtimeData.cgi?Scope=System';
+const checkPath = '/solar_api/v1/GetStorageRealtimeData.cgi?Scope=System';
 
-class OhmpilotDriver extends Homey.Driver {
+class StorageDriver extends Homey.Driver {
     /**
      * onInit is called when the driver is initialized.
      */
     async onInit() {
-        this.log('OhmPilot has been initialized');
+        this.log('StorageDriver has been initialized');
     }
 
     onPair(socket) {
-        var devices ;
+        var devices;
 
         socket.on('validate', function (data, callback) {
             console.log("Validate new connection settings");
@@ -38,7 +38,7 @@ class OhmpilotDriver extends Homey.Driver {
 
         socket.on('list_devices', function (data, callback) {
             console.log('List devices started...');
-        
+
             // emit when devices are still being searched
             //socket.emit('list_devices', callback);
             // fire the callback when searching is done
@@ -53,7 +53,7 @@ class OhmpilotDriver extends Homey.Driver {
     }
 }
 
-module.exports = OhmpilotDriver;
+module.exports = StorageDriver;
 
 function checkResponseStatus(res) {
     if (res.ok) {
@@ -64,27 +64,27 @@ function checkResponseStatus(res) {
     }
 }
 
-function ohmpilotToDevice(json, ip, DeviceId) {
+function storageToDevice(json, ip, DeviceId) {
     let device = {
-        name: `${json.Details.Model}-${json.Details.Serial}`,
+        name: `${json.Controller.Details.Model}-${json.Controller.Details.Serial}`,
         settings: {
             ip: ip,
             DeviceId: parseInt(DeviceId, 10),
         },
         data: {
-            id: json.Details.Serial,
+            id: json.Controller.Details.Serial,
         }
     };
     console.log(device);
     return device;
 }
 
-function buildDevices(json,ip) {
+function buildDevices(json, ip) {
     var devices = [];
     for (var id in json) {
         if (json.hasOwnProperty(id)) {
-            devices.push(ohmpilotToDevice(json[id],ip,id));
+            devices.push(storageToDevice(json[id], ip, id));
         }
     };
-    return devices;    
+    return devices;
 }

@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 const updatePath = '/solar_api/v1/GetOhmPilotRealtimeData.cgi?';
 const delay = s => new Promise(resolve => setTimeout(resolve, 1000 * s));
 
-class Inverter extends Homey.Device {
+class OhmPilotDevice extends Homey.Device {
   /**
    * onInit is called when the device is initialized.
    */
@@ -22,7 +22,7 @@ class Inverter extends Homey.Device {
     async pollDevice() {
         while (this.polling) {
             console.log(`Updating OhmPilot ${this.getName()}`);
-            this.updateInverter();
+            this.updateOhmPilot();
             await delay(this.getSetting('polling_interval'));
         }
     }
@@ -63,7 +63,7 @@ class Inverter extends Homey.Device {
       this.polling = false;
   }
 
-    updateInverter() {
+    updateOhmPilot() {
         let settings = this.getSettings();
         const updateUrl = `http://${settings.ip}${updatePath}Scope=Device&DeviceId=${settings.DeviceId}`;
         console.log(updateUrl);
@@ -121,7 +121,7 @@ class Inverter extends Homey.Device {
     }
 }
 
-module.exports = Inverter ;
+module.exports = OhmPilotDevice ;
 
 function checkResponseStatus(res) {
     if (res.ok) {
