@@ -1,7 +1,7 @@
 {
   "id": "reporting",
   "name": {
-    "en": "reporting"
+    "en": "Reporting"
   },
   "class": "sensor",
   "capabilities": [

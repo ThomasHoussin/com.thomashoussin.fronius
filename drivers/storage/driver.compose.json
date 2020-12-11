@@ -1,7 +1,7 @@
 {
   "id": "storage",
   "name": {
-    "en": "storage"
+    "en": "Storage"
   },
   "class": "solarpanel",
   "capabilities": [

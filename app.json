@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thomashoussin.fronius",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "compatibility": ">=3.1.0",
   "sdk": 2,
   "name": {
@@ -17,7 +17,10 @@
       "Smartmeter",
       "solar",
       "panels",
-      "inverter"
+      "inverter",
+      "storage",
+      "battery",
+      "ohmpilot"
     ]
   },
   "category": [
