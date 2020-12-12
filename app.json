@@ -336,7 +336,7 @@
     {
       "id": "reporting",
       "name": {
-        "en": "reporting"
+        "en": "Reporting"
       },
       "class": "sensor",
       "capabilities": [
@@ -603,7 +603,7 @@
     {
       "id": "storage",
       "name": {
-        "en": "storage"
+        "en": "Storage"
       },
       "class": "solarpanel",
       "capabilities": [
