@@ -33,6 +33,11 @@ class Smartmeter extends FroniusDevice {
         //Phase frequency, in Hz ; default to 0
         this.setCapabilityValue('measure_frequency', typeof data.Frequency_Phase_Average == 'undefined' ? 0 : data.Frequency_Phase_Average);
     }
+
+    async onSettings(oldSettings, newSettings, changedKeys) {
+        this.log('PowerFlow settings where changed');
+        this.setEnergy({ cumulative: newSettings.cumulative });
+    }
 }
 
 module.exports = Smartmeter ;

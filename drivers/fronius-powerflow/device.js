@@ -34,6 +34,11 @@ class PowerFlow extends FroniusDevice {
       */
         this.setCapabilityValue('measure_power', pgrid + pakku);     
     }
+
+    async onSettings(oldSettings, newSettings, changedKeys) {
+        this.log('PowerFlow settings where changed');
+        this.setEnergy({ cumulative: newSettings.cumulative });
+    }
 }
 
 module.exports = PowerFlow ;
