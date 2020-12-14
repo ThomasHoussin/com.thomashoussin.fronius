@@ -336,7 +336,7 @@
     {
       "id": "reporting",
       "name": {
-        "en": "reporting"
+        "en": "Reporting"
       },
       "class": "sensor",
       "capabilities": [
@@ -597,13 +597,21 @@
           "label": {
             "en": "Make cumulative in Energy tab"
           }
+        },
+        {
+          "id": "gen24meterbug",
+          "type": "checkbox",
+          "value": false,
+          "label": {
+            "en": "Use workaround for GEN24 Smartmeter (only if no data reported)"
+          }
         }
       ]
     },
     {
       "id": "storage",
       "name": {
-        "en": "storage"
+        "en": "Storage"
       },
       "class": "solarpanel",
       "capabilities": [
