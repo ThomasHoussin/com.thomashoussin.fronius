@@ -16,6 +16,10 @@ Feel free to donate to  support the project !
 [<img src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif">](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=RVBS24SPLU922&currency_code=EUR)
 
 # Version History
+### v0.0.11
+	- Code factoring
+### v0.0.10
+	- Workaround for issue #2, smartmeter on GEN24
 ### v0.0.9
 	- Add storage and ohmpilot - basic support
 ### v0.0.8

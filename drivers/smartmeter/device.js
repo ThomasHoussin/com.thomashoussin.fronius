@@ -4,11 +4,11 @@ const FroniusDevice = require('../../lib/device.js');
 
 class Smartmeter extends FroniusDevice {
 
-  async onSettings(oldSettings, newSettings, changedKeys) {
-      this.log('Smartmeter settings where changed');
-      this.setEnergy({ cumulative: newSettings.cumulative });
-      this.updateMeter();
-  }
+    async onSettings(oldSettings, newSettings, changedKeys) {
+        this.log('Smartmeter settings where changed');
+        this.setEnergy({ cumulative: newSettings.cumulative })
+            .then(this.updateFroniusDevice());
+    }
 
     getUpdatePath() {
         return '/solar_api/v1/GetMeterRealtimeData.cgi?';
