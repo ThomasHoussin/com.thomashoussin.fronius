@@ -20,6 +20,7 @@ function froniusToDevice(json, ip, DeviceId) {
         settings: {
             ip: ip,
             DeviceId: parseInt(DeviceId, 10),
+            gen24meterbug: (typeof json.GRID_FREQUENCY_MEAN_F32 == 'undefined' ? false : true),
         },
         data: {
             id: json.Details.Serial,
