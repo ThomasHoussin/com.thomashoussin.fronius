@@ -1,0 +1,53 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "OhmPilot state"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/information.svg",
+  "values": [
+    {
+      "id": "up",
+      "title": {
+        "en": "Up and running"
+      }
+    },
+    {
+      "id": "keepmin",
+      "title": {
+        "en": "Keep minimum temperature"
+      }
+    },
+    {
+      "id": "legionella",
+      "title": {
+        "en": "Legionella protection"
+      }
+    },
+    {
+      "id": "critical",
+      "title": {
+        "en": "Critical fault"
+      }
+    },
+    {
+      "id": "fault",
+      "title": {
+        "en": "Fault"
+      }
+    },
+    {
+      "id": "boost",
+      "title": {
+        "en": "Boost mode"
+      }
+    },
+    {
+      "id": "unkown",
+      "title": {
+        "en": "Unknown state"
+      }
+    }
+  ]
+}

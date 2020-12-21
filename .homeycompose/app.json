@@ -1,6 +1,6 @@
 {
   "id": "com.thomashoussin.fronius",
-  "version": "0.0.6",
+  "version": "0.0.11",
   "compatibility": ">=3.1.0",
   "sdk": 2,
   "name": {
@@ -16,7 +16,10 @@
       "Smartmeter",
       "solar",
       "panels",
-      "inverter"
+      "inverter",
+      "storage",
+      "battery",
+      "ohmpilot"
     ]
   },
   "category": [
@@ -41,5 +44,6 @@
   "bugs": {
     "url": "https://github.com/ThomasHoussin/com.thomashoussin.fronius/issues"
   },
-  "source": "https://github.com/ThomasHoussin/com.thomashoussin.fronius"
+  "source": "https://github.com/ThomasHoussin/com.thomashoussin.fronius",
+  "homeyCommunityTopicId": 38557
 }

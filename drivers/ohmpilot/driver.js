@@ -1,11 +1,10 @@
 'use strict';
 
-const he = require('he');
 const FroniusDriver = require('../../lib/driver.js');
 
-class Fronius extends FroniusDriver {
+class OhmpilotDriver extends FroniusDriver {
     getCheckPath() {
-        return '/solar_api/v1/GetInverterInfo.cgi';
+        return '/solar_api/v1/GetOhmPilotRealtimeData.cgi?Scope=System';
     }
 
     getFroniusToDevice() {
@@ -13,18 +12,17 @@ class Fronius extends FroniusDriver {
     }
 }
 
-module.exports = Fronius;
+module.exports = OhmpilotDriver;
 
 function froniusToDevice(json, ip, DeviceId) {
     let device = {
-        name: he.decode(json.CustomName),
+        name: `${json.Details.Model}-${json.Details.Serial}`,
         settings: {
             ip: ip,
             DeviceId: parseInt(DeviceId, 10),
-            PVPower: json.PVPower,
         },
         data: {
-            id: json.UniqueID,
+            id: json.Details.Serial,
         }
     };
     console.log(device);

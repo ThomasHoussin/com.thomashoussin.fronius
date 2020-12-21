@@ -1,40 +1,43 @@
 {
-  "id": "smartmeter",
+  "id": "storage",
   "name": {
-    "en": "Smartmeter"
+    "en": "Storage"
   },
-  "class": "sensor",
+  "class": "solarpanel",
   "capabilities": [
     "measure_power",
     "measure_current",
     "measure_voltage",
-    "measure_frequency",
+    "measure_battery",
     "meter_power",
-    "meter_power.injected"
+    "measure_temperature"
   ],
   "capabilitiesOptions": {
     "meter_power": {
-      "title": { "en": "Energy consumed" }
-    },
-    "meter_power.injected": {
-      "title": { "en": "Energy injected" }
+      "title": { "en": "Current maximum capacity" }
     },
     "measure_current": {
-      "title": { "en": "Current" }
+      "title": { "en": "Battery output current" }
     },
     "measure_voltage": {
-      "title": { "en": "Voltage" }
+      "title": { "en": "Battery output voltage" }
     },
-    "measure_frequency": {
-      "title": { "en": "Phase frequency" }
+    "measure_temperature": {
+      "title": { "en": "Temperature" }
+    },
+    "measure_battery": {
+      "title": { "en": "Relative charged capacity" }
+    },
+    "measure_power": {
+      "approximated": true
     }
   },
   "energy": {
-    "cumulative": true
+    "batteries": [ "INTERNAL" ]
   },
   "images": {
-    "large": "/drivers/smartmeter/assets/images/large.png",
-    "small": "/drivers/smartmeter/assets/images/small.png"
+    "large": "/drivers/storage/assets/images/large.png",
+    "small": "/drivers/storage/assets/images/small.png"
   },
   "pair": [
     {
@@ -83,26 +86,10 @@
           "type": "number",
           "value": 60,
           "label": {
-            "en": "Polling interval for data collection, in seconds"
+            "en": "Polling interval in seconds"
           }
         }
       ]
-    },
-    {
-      "id": "cumulative",
-      "type": "checkbox",
-      "value": true,
-      "label": {
-        "en": "Make cumulative in Energy tab"
-      }
-    },
-    {
-      "id": "gen24meterbug",
-      "type": "checkbox",
-      "value": false,
-      "label": {
-        "en": "Use workaround for GEN24 Smartmeter (only if no data reported)"
-      }
     }
   ]
 }

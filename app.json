@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thomashoussin.fronius",
-  "version": "0.0.6",
+  "version": "0.0.11",
   "compatibility": ">=3.1.0",
   "sdk": 2,
   "name": {
@@ -17,7 +17,10 @@
       "Smartmeter",
       "solar",
       "panels",
-      "inverter"
+      "inverter",
+      "storage",
+      "battery",
+      "ohmpilot"
     ]
   },
   "category": [
@@ -43,6 +46,7 @@
     "url": "https://github.com/ThomasHoussin/com.thomashoussin.fronius/issues"
   },
   "source": "https://github.com/ThomasHoussin/com.thomashoussin.fronius",
+  "homeyCommunityTopicId": 38557,
   "drivers": [
     {
       "id": "fronius-powerflow",
@@ -244,6 +248,250 @@
       ]
     },
     {
+      "id": "ohmpilot",
+      "name": {
+        "en": "Ohmpilot"
+      },
+      "class": "heater",
+      "capabilities": [
+        "meter_power",
+        "measure_power",
+        "measure_temperature",
+        "ohmpilotstate"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "title": {
+            "en": "Actual power consumption"
+          }
+        },
+        "meter_power": {
+          "title": {
+            "en": "Total consumed energy"
+          }
+        },
+        "measure_temperature": {
+          "title": {
+            "en": "Temperature from sensor"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/ohmpilot/assets/images/large.png",
+        "small": "/drivers/ohmpilot/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "enter_ip",
+          "next": "list_devices"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "enter_ip",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Request settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "Fronius Datamanager IP address"
+              }
+            },
+            {
+              "id": "DeviceId",
+              "type": "number",
+              "label": {
+                "en": "Fronius ohmpilot DeviceId"
+              }
+            },
+            {
+              "id": "polling_interval",
+              "type": "number",
+              "value": 60,
+              "label": {
+                "en": "Polling interval in seconds"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reporting",
+      "name": {
+        "en": "Reporting"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "meter_power.produced",
+        "meter_power.toGrid",
+        "meter_power.fromGrid",
+        "selfconsumption",
+        "selfconsumption.month",
+        "spending.day",
+        "savings.day",
+        "spending.month",
+        "savings.month",
+        "spending.previousmonth",
+        "button.recoverHistory",
+        "button.resetHistory"
+      ],
+      "capabilitiesOptions": {
+        "meter_power.fromGrid": {
+          "title": {
+            "en": "Energy from grid"
+          }
+        },
+        "meter_power.toGrid": {
+          "title": {
+            "en": "Energy injected"
+          }
+        },
+        "meter_power.produced": {
+          "title": {
+            "en": "Energy produced"
+          }
+        },
+        "selfconsumption": {
+          "title": {
+            "en": "Self-consumption rate"
+          }
+        },
+        "selfconsumption.month": {
+          "title": {
+            "en": "Month self-consumption rate"
+          }
+        },
+        "spending.day": {
+          "title": {
+            "en": "Today spending"
+          }
+        },
+        "savings.day": {
+          "title": {
+            "en": "Today savings"
+          }
+        },
+        "spending.month": {
+          "title": {
+            "en": "Month spending"
+          }
+        },
+        "spending.previousmonth": {
+          "title": {
+            "en": "Previous month spending"
+          }
+        },
+        "savings.month": {
+          "title": {
+            "en": "Month savings"
+          }
+        },
+        "button.recoverHistory": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Recover history"
+          },
+          "desc": {
+            "en": "This will try to get historical data from Fronius datamanager (click once, this may take a while)"
+          }
+        },
+        "button.resetHistory": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reset history"
+          },
+          "desc": {
+            "en": "This will reset current month values to 0"
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/reporting/assets/images/large.png",
+        "small": "/drivers/reporting/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "enter_values"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Request settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "Fronius Datamanager IP address"
+              }
+            },
+            {
+              "id": "DeviceId",
+              "type": "number",
+              "value": -1,
+              "label": {
+                "en": "Primary meter id"
+              }
+            },
+            {
+              "id": "polling_interval",
+              "type": "number",
+              "value": 300,
+              "label": {
+                "en": "Polling interval for data collection, in seconds"
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Cost settings"
+          },
+          "children": [
+            {
+              "id": "purchaseprice",
+              "type": "number",
+              "value": 0.1765,
+              "label": {
+                "en": "Electricity purchase price per kwh"
+              }
+            },
+            {
+              "id": "sellprice",
+              "type": "number",
+              "value": 0.1,
+              "label": {
+                "en": "Electricity sell price per kwh"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "smartmeter",
       "name": {
         "en": "Smartmeter"
@@ -350,6 +598,121 @@
           "label": {
             "en": "Make cumulative in Energy tab"
           }
+        },
+        {
+          "id": "gen24meterbug",
+          "type": "checkbox",
+          "value": false,
+          "label": {
+            "en": "Use workaround for GEN24 Smartmeter (only if no data reported)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "name": {
+        "en": "Storage"
+      },
+      "class": "solarpanel",
+      "capabilities": [
+        "measure_power",
+        "measure_current",
+        "measure_voltage",
+        "measure_battery",
+        "meter_power",
+        "measure_temperature"
+      ],
+      "capabilitiesOptions": {
+        "meter_power": {
+          "title": {
+            "en": "Current maximum capacity"
+          }
+        },
+        "measure_current": {
+          "title": {
+            "en": "Battery output current"
+          }
+        },
+        "measure_voltage": {
+          "title": {
+            "en": "Battery output voltage"
+          }
+        },
+        "measure_temperature": {
+          "title": {
+            "en": "Temperature"
+          }
+        },
+        "measure_battery": {
+          "title": {
+            "en": "Relative charged capacity"
+          }
+        },
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "energy": {
+        "batteries": [
+          "INTERNAL"
+        ]
+      },
+      "images": {
+        "large": "/drivers/storage/assets/images/large.png",
+        "small": "/drivers/storage/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "enter_ip",
+          "next": "list_devices"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "enter_ip",
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Request settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "Fronius Datamanager IP address"
+              }
+            },
+            {
+              "id": "DeviceId",
+              "type": "number",
+              "label": {
+                "en": "Fronius inverter DeviceId"
+              }
+            },
+            {
+              "id": "polling_interval",
+              "type": "number",
+              "value": 60,
+              "label": {
+                "en": "Polling interval in seconds"
+              }
+            }
+          ]
         }
       ]
     }
@@ -367,6 +730,98 @@
         "en": "Hz"
       },
       "decimals": 0
+    },
+    "ohmpilotstate": {
+      "type": "enum",
+      "title": {
+        "en": "OhmPilot state"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/information.svg",
+      "values": [
+        {
+          "id": "up",
+          "title": {
+            "en": "Up and running"
+          }
+        },
+        {
+          "id": "keepmin",
+          "title": {
+            "en": "Keep minimum temperature"
+          }
+        },
+        {
+          "id": "legionella",
+          "title": {
+            "en": "Legionella protection"
+          }
+        },
+        {
+          "id": "critical",
+          "title": {
+            "en": "Critical fault"
+          }
+        },
+        {
+          "id": "fault",
+          "title": {
+            "en": "Fault"
+          }
+        },
+        {
+          "id": "boost",
+          "title": {
+            "en": "Boost mode"
+          }
+        },
+        {
+          "id": "unkown",
+          "title": {
+            "en": "Unknown state"
+          }
+        }
+      ]
+    },
+    "savings": {
+      "type": "number",
+      "title": {
+        "en": "Savings"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/savings.svg",
+      "units": {
+        "en": "€"
+      },
+      "decimals": 2
+    },
+    "selfconsumption": {
+      "type": "number",
+      "title": {
+        "en": "Self-consumption rate"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/selfconsumption.svg",
+      "units": {
+        "en": "%"
+      },
+      "decimals": 1
+    },
+    "spending": {
+      "type": "number",
+      "title": {
+        "en": "Spending"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/spending.svg",
+      "units": {
+        "en": "€"
+      },
+      "decimals": 2
     }
   }
 }
