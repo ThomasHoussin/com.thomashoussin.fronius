@@ -46,7 +46,7 @@ class Reporting extends Homey.Device {
           return;
       });
 
-      //everyday except 1st day of the mont
+      //everyday except 1st day of the month
       this.dailycron = cron.schedule('0 0 2-31 * *', () => {
           this.emit('everyday');
       });
@@ -79,18 +79,19 @@ class Reporting extends Homey.Device {
     }
 
     async everymonth() {
-        console.log(`Running everymonth task for ${this.getName()}`);
-        await this.everyday();
-        await this.setStoreValue("meter_power.fromGrid.previousmonth", this.getStoreValue("meter_power.toGrid.month"));
-
+        console.log(`Running everymonth task for ${this.getName()}`);     
+        await this.setStoreValue("meter_power.fromGrid.previousmonth", this.getStoreValue("meter_power.fromGrid.month") + this.getStoreValue("meter_power.fromGrid.today"));
+        this.setStoreValue("meter_power.toGrid.today", 0);
+        this.setStoreValue("meter_power.produced.today", 0);
+        this.setStoreValue("meter_power.fromGrid.today", 0);
         this.setStoreValue("meter_power.toGrid.month", 0);
         this.setStoreValue("meter_power.fromGrid.month", 0);
         this.setStoreValue("meter_power.produced.month", 0);
     }
 
     async resetHistory() {
-        await this.setStoreValue("meter_power.toGrid.month",0);
-        await this.setStoreValue("meter_power.fromGrid.month",0);
+        await this.setStoreValue("meter_power.toGrid.month", 0);
+        await this.setStoreValue("meter_power.fromGrid.month", 0);
         await this.setStoreValue("meter_power.produced.month", 0);
         await this.setStoreValue("meter_power.fromgrid.previousmonth", 0);
         this.emit('updateCapabilities');
@@ -184,37 +185,49 @@ class Reporting extends Homey.Device {
         let yesterday = new Date();
         yesterday.setDate(today.getDate() - 1);
         let firstDay = new Date(yesterday.getFullYear(), yesterday.getMonth(), 1);
+        let firstDayPreviousMonth, lastDayPreviousMonth ;
 
-        //produced power for current month
-        this.getArchiveProduced(firstDay, yesterday)
-            .then(power => {
-                this.setStoreValue("meter_power.produced.month", power)
-                    .then(value => this.emit('updateCapabilities'))
-                    .catch(error => {
-                        console.log(`Error when saving value produced : ${error}`);
-                    });
-            })
-            .catch(error => {
-                console.log(`Error in recoverHistory for production : ${error}`);
-            });
+        if (today.getDate() == 1) {
+            //first day of the month
+            firstDayPreviousMonth = new Date(yesterday.getFullYear(), yesterday.getMonth(), 1);
+            lastDayPreviousMonth = yesterday;
+        }
+        else {
+            firstDayPreviousMonth = new Date(yesterday.getFullYear(), yesterday.getMonth() - 1, 1);
+            lastDayPreviousMonth = new Date(yesterday.getFullYear(), yesterday.getMonth(), 0);
+        }
 
-        //fromgrid / togrid power for current month
-        this.getArchiveMeter(firstDay, yesterday)
-            .then(obj => {
-                this.setStoreValue("meter_power.fromGrid.month", obj.fromGridPower)
-                    .then(value => this.setStoreValue("meter_power.toGrid.month", obj.toGridPower))
-                    .then(value => this.emit('updateCapabilities'))
-                    .catch(error => {
-                        console.log(`Error when saving value fromgrid / togrid  : ${error}`);
-                    });
-            })
-            .catch(error => {
-                console.log(`Error in recoverHistory for meter : ${error}`);
-            });
+        //if we are the first day of the month, history for current month is 0
+        if (today.getDate() != 1) {
+            //produced power for current month
+            this.getArchiveProduced(firstDay, yesterday)
+                .then(power => {
+                    this.setStoreValue("meter_power.produced.month", power)
+                        .then(value => this.emit('updateCapabilities'))
+                        .catch(error => {
+                            console.log(`Error when saving value produced : ${error}`);
+                        });
+                })
+                .catch(error => {
+                    console.log(`Error in recoverHistory for production : ${error}`);
+                });
 
+            //fromgrid / togrid power for current month
+            this.getArchiveMeter(firstDay, yesterday)
+                .then(obj => {
+                    this.setStoreValue("meter_power.fromGrid.month", obj.fromGridPower)
+                        .then(value => this.setStoreValue("meter_power.toGrid.month", obj.toGridPower))
+                        .then(value => this.emit('updateCapabilities'))
+                        .catch(error => {
+                            console.log(`Error when saving value fromgrid / togrid  : ${error}`);
+                        });
+                })
+                .catch(error => {
+                    console.log(`Error in recoverHistory for meter : ${error}`);
+                });
+        }
+        
         //from grid for previous month
-        let firstDayPreviousMonth = new Date(yesterday.getFullYear(), yesterday.getMonth() - 1, 1);
-        let lastDayPreviousMonth = new Date(yesterday.getFullYear(), yesterday.getMonth(), 0);
         this.getArchiveMeter(firstDayPreviousMonth, lastDayPreviousMonth)
             .then(obj => {
                 console.log(obj);
