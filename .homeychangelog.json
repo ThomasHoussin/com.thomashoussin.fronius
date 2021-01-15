@@ -25,5 +25,8 @@
   },
   "0.0.11": {
     "en": "Code factoring"
+  },
+  "0.0.12": {
+    "en": "Fixed bug at beginning of the month in device Reporting"
   }
 }
