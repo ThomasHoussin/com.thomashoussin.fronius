@@ -28,5 +28,8 @@
   },
   "0.0.12": {
     "en": "Fixed bug at beginning of the month in device Reporting"
+  },
+  "0.0.13": {
+    "en": "Fixed bug with smartmeter and 3-phase (#10)"
   }
 }

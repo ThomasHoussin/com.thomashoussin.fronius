@@ -27,7 +27,7 @@ class Smartmeter extends FroniusDevice {
             //Current, in A ; default to 0 
             let current = 0;
             if (typeof data.Current_AC_Sum == 'number') current = data.Current_AC_Sum;
-            else if (typeof data.Current_AC_Phase_1 == 'number' && typeof data.Current_AC_Phase_2 == 'number' && typeof data.Current_AC_Phase_3 == 'number') current = data.Current_AC_Phase_1 + data.Current_AC_Phase_2 + Current_AC_Phase_3;
+            else if (typeof data.Current_AC_Phase_1 == 'number' && typeof data.Current_AC_Phase_2 == 'number' && typeof data.Current_AC_Phase_3 == 'number') current = data.Current_AC_Phase_1 + data.Current_AC_Phase_2 + data.Current_AC_Phase_3;
             this.setCapabilityValue('measure_current', current);
 
             //Voltage, in V ; default to 0 
