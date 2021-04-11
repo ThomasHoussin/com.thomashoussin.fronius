@@ -1,6 +1,6 @@
 {
   "name": "com.thomashoussin.fronius",
-  "version": "0.0.9",
+  "version": "0.0.13",
   "main": "app.js",
   "dependencies": {
     "node-fetch": "^2.6.1",
