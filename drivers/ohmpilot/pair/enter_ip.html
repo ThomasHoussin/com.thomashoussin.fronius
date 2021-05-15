@@ -5,17 +5,19 @@
         let hostname = document.getElementById('hostname').value;
         if(!hostname){
             Homey.alert('Please fill in all fields');
-        }else {
-
-            Homey.emit('validate', {
-                "host": hostname,
-            }, (err, result) => {
-                if (!err) {
-                    Homey.nextView();
-                } else {
-                    Homey.alert(err);
-                }
-            });
+        }
+        else {
+            Homey.emit('validate', {"host": hostname })
+                .then(result => {
+                    if (result == 'ok' ) {
+                        Homey.nextView();
+                    } else {
+                        Homey.alert('Unable to connect');
+                    }
+                })
+                .catch(error => {
+                    Homey.alert(error);
+                });
         }
     }
 

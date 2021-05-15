@@ -4,7 +4,7 @@ const FroniusDevice = require('../../lib/device.js');
 
 class Smartmeter extends FroniusDevice {
 
-    async onSettings(oldSettings, newSettings, changedKeys) {
+    async onSettings({ oldSettings, newSettings, changedKeys }) {
         this.log('Smartmeter settings where changed');
         this.setEnergy({ cumulative: newSettings.cumulative })
             .then(this.updateFroniusDevice());

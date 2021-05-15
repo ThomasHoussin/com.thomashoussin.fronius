@@ -10,20 +10,18 @@ class FroniusReporting extends Homey.Driver {
    * onInit is called when the driver is initialized.
    */
   async onInit() {
-      this.log('FroniusArchive has been initialized');
+      this.log('FroniusReporting has been initialized');
   }
 
-    onPair(socket) {
-        var devices;
-
-        socket.on('validate', function (data, callback) {
+    onPair(session) {
+        session.setHandler('validate', async function (data) {
             console.log("Validate new connection settings");
             let ip = data.host;
 
             const validationUrl = `http://${ip}${checkPath}`;
             console.log(validationUrl);
 
-            fetch(validationUrl)
+            return fetch(validationUrl)
                 .then(checkResponseStatus)
                 .then(result => result.json())
                 .then(json => json.Body.Data)
@@ -34,13 +32,13 @@ class FroniusReporting extends Homey.Driver {
                             return parseInt(id,10);
                         }
                     };
-                    callback(new Error(Homey.__('no primary meter found')));
+                    throw new Error('no primary meter found');
                 })
                 .then(res => {
-                    callback(false, res)
+                    return res;
                 })
                 .catch(error => {
-                    callback(new Error(Homey.__('ip_error')));
+                    return error ;
                 });
         });
     }
@@ -50,9 +48,9 @@ module.exports = FroniusReporting;
 
 function checkResponseStatus(res) {
     if (res.ok) {
-        return res;
+        return res
     } else {
         console.log(`Wrong response status : ${res.status} (${res.statusText})`);
-        callback(new Error(Homey.__('ip_error')));
+        throw new Error(`Wrong response status : ${res.status} (${res.statusText})`);
     }
 }
