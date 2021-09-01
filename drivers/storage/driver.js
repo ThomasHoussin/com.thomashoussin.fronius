@@ -14,15 +14,6 @@ class StorageDriver extends FroniusDriver {
 
 module.exports = StorageDriver;
 
-function checkResponseStatus(res) {
-    if (res.ok) {
-        return res
-    } else {
-        console.log(`Wrong response status : ${res.status} (${res.statusText})`);
-        callback(new Error(Homey.__('ip_error')));
-    }
-}
-
 function froniusToDevice(json, ip, DeviceId) {
     let device = {
         name: `${json.Controller.Details.Model}-${json.Controller.Details.Serial}`,

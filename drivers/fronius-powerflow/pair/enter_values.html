@@ -9,29 +9,30 @@
             Homey.alert('Please fill in all fields');
         }
         else {
+            Homey.emit('validate', { "host": hostname })
+                .then(result => {
+                    if (result == 'ok') {
+                        let deviceDefinition = {
+                            name,
+                            data: {},
+                            settings: { ip: hostname }
+                        };
 
-            Homey.emit('validate', {
-                "host": hostname
-            }, (err, result) => {
-                if (!err) {
-                    let deviceDefinition = {
-                        name,
-                        data: {},
-                        settings: { ip: hostname }
-                    };
-
-                    Homey.createDevice(deviceDefinition, (error, result) => {
-                        if (error) {
-                            Homey.alert(error);
-                        } else {
-                            Homey.done();
-                        }
-                    });
-
-                } else {
-                    Homey.alert(err);
-                }
-            });
+                        Homey.createDevice(deviceDefinition)
+                            .then(function (result) {
+                                Homey.done();
+                            })
+                            .catch(error => {
+                                Homey.alert(error);
+                            });
+                    }
+                    else {
+                        Homey.alert('Error : unable to connect');
+                    }
+                })
+                .catch(error => {
+                    Homey.alert(error);
+                });
         }
     }
 

@@ -10,28 +10,29 @@
         }
         else {
 
-            Homey.emit('validate', {
-                "host": hostname
-            }, (err, result) => {
-                if (!err) {
-                    let deviceDefinition = {
-                        name: name,
-                        data: {},
-                        settings: { ip: hostname, DeviceId: result }
-                    };
+            Homey.emit('validate', { "host": hostname })
+                .then(result => {
+                    if (result == null || result == '' || result instanceof Error) {
+                        Homey.alert(result);
+                    } else {
+                        let deviceDefinition = {
+                            name: name,
+                            data: {},
+                            settings: { ip: hostname, DeviceId: result }
+                        };
 
-                    Homey.createDevice(deviceDefinition, (error, result) => {
-                        if (error) {
-                            Homey.alert(error);
-                        } else {
-                            Homey.done();
-                        }
-                    });
-
-                } else {
-                    Homey.alert(err);
-                }
-            });
+                        Homey.createDevice(deviceDefinition)
+                            .then(function (res) {
+                                Homey.done();
+                            })
+                            .catch(error => {
+                                Homey.alert(error);
+                            });
+                    } 
+                })
+                .catch(error => {
+                    Homey.alert(error);
+                });
         }
     }
 

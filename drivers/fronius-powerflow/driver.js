@@ -13,23 +13,21 @@ class FroniusPowerFlow extends Homey.Driver {
       this.log('FroniusPowerFlow has been initialized');
   }
 
-    onPair(socket) {
-        var devices;
-
-        socket.on('validate', function (data, callback) {
+    onPair(session) {
+        session.setHandler('validate', async function (data) {
             console.log("Validate new connection settings");
             let ip = data.host;
 
             const validationUrl = `http://${ip}${checkPath}`;
             console.log(validationUrl);
 
-            fetch(validationUrl)
+            return fetch(validationUrl)
                 .then(checkResponseStatus)
                 .then(res => {
-                    callback(false, 'ok')
+                    return 'ok';
                 })
                 .catch(error => {
-                    callback(new Error(Homey.__('ip_error')));
+                    return error;
                 });
         });
     }
@@ -39,9 +37,9 @@ module.exports = FroniusPowerFlow;
 
 function checkResponseStatus(res) {
     if (res.ok) {
-        return res;
+        return res
     } else {
         console.log(`Wrong response status : ${res.status} (${res.statusText})`);
-        callback(new Error(Homey.__('ip_error')));
+        throw new Error(`Wrong response status : ${res.status} (${res.statusText})`);
     }
 }

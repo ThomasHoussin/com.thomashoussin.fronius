@@ -31,5 +31,8 @@
   },
   "0.0.13": {
     "en": "Fixed bug with smartmeter and 3-phase (#10)"
+  },
+  "0.1.0": {
+    "en": "Update to SDKv3"
   }
 }
