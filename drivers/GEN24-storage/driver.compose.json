@@ -1,0 +1,72 @@
+{
+  "id": "GEN24storage",
+  "name": {
+    "en": "GEN24-storage"
+  },
+  "class": "solarpanel",
+  "capabilities": [
+    "measure_battery",
+    "battery_mode"
+  ],
+  "capabilitiesOptions": {
+    "measure_battery": {
+      "title": { "en": "Relative charged capacity" }
+    },
+    "measure_power": {
+      "approximated": false
+    }
+  },
+  "energy": {
+    "batteries": [ "INTERNAL" ]
+  },
+  "images": {
+    "large": "/drivers/GEN24-storage/assets/images/large.png",
+    "small": "/drivers/GEN24-storage/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "enter_ip",
+      "next": "list_devices"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "prev": "enter_ip",
+        "next": "add_devices"
+      },
+      "options": {
+        "singular": false
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Request settings"
+      },
+      "children": [
+        {
+          "id": "ip",
+          "type": "text",
+          "label": {
+            "en": "Fronius Datamanager IP address"
+          }
+        },
+        {
+          "id": "polling_interval",
+          "type": "number",
+          "value": 60,
+          "label": {
+            "en": "Polling interval in seconds"
+          }
+        }
+      ]
+    }
+  ]
+}

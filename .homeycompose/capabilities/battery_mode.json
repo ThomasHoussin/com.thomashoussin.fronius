@@ -1,0 +1,9 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Battery mode"
+  },
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/information.svg"
+}

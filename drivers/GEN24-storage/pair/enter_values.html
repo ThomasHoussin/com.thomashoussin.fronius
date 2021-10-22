@@ -1,0 +1,45 @@
+<script type="text/javascript">
+    Homey.setTitle("Specificy Fronius Datamanager IP/hostname");
+
+    function doSubmit(){
+        let hostname = document.getElementById('hostname').value;
+        let name = document.getElementById('name').value;
+
+        if (!hostname || !name) {
+            Homey.alert('Please fill in all fields');
+        }
+        else {
+            Homey.emit('validate', { "host": hostname })
+                .then(result => {
+                    if (result == 'ok') {
+                        let deviceDefinition = {
+                            name,
+                            data: {},
+                            settings: { ip: hostname }
+                        };
+
+                        Homey.createDevice(deviceDefinition)
+                            .then(function (result) {
+                                Homey.done();
+                            })
+                            .catch(error => {
+                                Homey.alert(error);
+                            });
+                    }
+                    else {
+                        Homey.alert('Error : unable to connect');
+                    }
+                })
+                .catch(error => {
+                    Homey.alert(error);
+                });
+        }
+    }
+
+</script>
+
+<label for="name">Site name</label>
+<input type="text" id="name" name="name" placeholder="Site Name" required /><br />
+<label for="hostname">Hostname/IP address</label>
+<input type="text" id="hostname" name="hostname" placeholder="IP/hostname" required /><br />
+<button type="button" onclick="doSubmit()">Save</button>
