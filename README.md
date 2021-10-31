@@ -16,6 +16,8 @@ Feel free to donate to  support the project !
 [<img src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif">](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=RVBS24SPLU922&currency_code=EUR)
 
 # Version History
+### 0.1.2:
+	- Updated app image (athom request)
 ### 0.1.1:
 	- Add a GEN24 storage with basic informations
 ### 0.1.0:

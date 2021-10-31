@@ -20,3 +20,4 @@ Other
 * OhmPilot : Rheostat by Knut M. Synstad from the Noun Project
 * Status capability : Information by Royyan Wijaya from the Noun Project
 * Storage logo : solar battery by Pascal Heﬂ from the Noun Project
+* Fronius logo, app image and drivers images : Fronius website
