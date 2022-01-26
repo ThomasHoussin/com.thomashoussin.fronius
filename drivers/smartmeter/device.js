@@ -4,8 +4,55 @@ const FroniusDevice = require('../../lib/device.js');
 
 class Smartmeter extends FroniusDevice {
 
+    async onInit() {
+        this.log('Smartmeter has been initialized');
+
+        // Enable device polling
+        this.polling = true;
+        this.addListener('poll', this.pollDevice);
+        this.emit('poll');
+    }
+
     async onSettings({ oldSettings, newSettings, changedKeys }) {
         this.log('Smartmeter settings where changed');
+
+        //v0.1.3 introduced 3-phase capability
+        //we check if this capability is needed and add it if necessary
+        console.log(newSettings.threePhase);
+
+        if (newSettings.threePhase) {
+            if (!this.hasCapability('measure_current.phase1')) {
+                console.log(`Adding capability measure_current.phase1 to device ${this.getName()}`);
+                this.addCapability('measure_current.phase1');
+            }
+
+            if (!this.hasCapability('measure_current.phase2')) {
+                console.log(`Adding capability measure_current.phase2 to device ${this.getName()}`);
+                this.addCapability('measure_current.phase2');
+            }
+
+            if (!this.hasCapability('measure_current.phase3')) {
+                console.log(`Adding capability measure_current.phase3 to device ${this.getName()}`);
+                this.addCapability('measure_current.phase3');
+            }
+        }
+        else {
+            if (this.hasCapability('measure_current.phase1')) {
+                console.log(`Removing capability measure_current.phase1 to device ${this.getName()}`);
+                this.removeCapability('measure_current.phase1');
+            }
+
+            if (this.hasCapability('measure_current.phase2')) {
+                console.log(`Removing capability measure_current.phase2 to device ${this.getName()}`);
+                this.removeCapability('measure_current.phase2');
+            }
+
+            if (this.hasCapability('measure_current.phase3')) {
+                console.log(`Removing capability measure_current.phase3 to device ${this.getName()}`);
+                this.removeCapability('measure_current.phase3');
+            }
+        }
+
         this.setEnergy({ cumulative: newSettings.cumulative })
             .then(this.updateFroniusDevice());
     }
@@ -29,6 +76,11 @@ class Smartmeter extends FroniusDevice {
             if (typeof data.Current_AC_Sum == 'number') current = data.Current_AC_Sum;
             else if (typeof data.Current_AC_Phase_1 == 'number' && typeof data.Current_AC_Phase_2 == 'number' && typeof data.Current_AC_Phase_3 == 'number') current = data.Current_AC_Phase_1 + data.Current_AC_Phase_2 + data.Current_AC_Phase_3;
             this.setCapabilityValue('measure_current', current);
+            if (this.getSetting('threePhase')) {
+                if (typeof data.Current_AC_Phase_1 == 'number') this.setCapabilityValue('measure_current.phase1', data.Current_AC_Phase_1);
+                if (typeof data.Current_AC_Phase_2 == 'number') this.setCapabilityValue('measure_current.phase2', data.Current_AC_Phase_2);
+                if (typeof data.Current_AC_Phase_3 == 'number') this.setCapabilityValue('measure_current.phase3', data.Current_AC_Phase_3);
+            }
 
             //Voltage, in V ; default to 0 
             let voltage = 0;

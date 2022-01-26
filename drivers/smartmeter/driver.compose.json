@@ -97,6 +97,14 @@
       }
     },
     {
+      "id": "threePhase",
+      "type": "checkbox",
+      "value": false,
+      "label": {
+        "en": "Report 3-phase if possible"
+      }
+    },
+    {
       "id": "gen24meterbug",
       "type": "checkbox",
       "value": false,
