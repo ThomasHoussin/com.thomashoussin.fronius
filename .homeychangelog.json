@@ -46,5 +46,8 @@
   },
   "0.1.4": {
     "en": "Added custom label for 3phase"
+  },
+  "0.1.5": {
+    "en": "Added frequency in inverter"
   }
 }

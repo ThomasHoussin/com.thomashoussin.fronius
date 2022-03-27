@@ -16,6 +16,10 @@ Feel free to donate to  support the project !
 [<img src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif">](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=RVBS24SPLU922&currency_code=EUR)
 
 # Version History
+### 0.1.5: 
+    Added frequency in inverter
+### 0.1.4:
+    Added custom label for 3phase
 ### 0.1.3:
 	- Added 3-phase current in smartmeter
 ### 0.1.2:
