@@ -10,6 +10,7 @@
     "measure_current.DC",
     "measure_voltage.AC",
     "measure_voltage.DC",
+    "measure_frequency",
     "meter_power",
     "meter_power.YEAR",
     "meter_power.TOTAL"
@@ -35,6 +36,9 @@
     },
     "measure_voltage.DC": {
       "title": { "en": "DC voltage" }
+    },
+    "measure_frequency": {
+      "title": { "en": "Phase frequency" }
     }
   },
   "images": {

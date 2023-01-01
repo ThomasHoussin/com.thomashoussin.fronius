@@ -22,6 +22,15 @@
     "measure_current": {
       "title": { "en": "Current" }
     },
+    "measure_current.phase1": {
+      "title": { "en": "Current P1" }
+    },
+    "measure_current.phase2": {
+      "title": { "en": "Current P2" }
+    },
+    "measure_current.phase3": {
+      "title": { "en": "Current P3" }
+    },
     "measure_voltage": {
       "title": { "en": "Voltage" }
     },
@@ -94,6 +103,14 @@
       "value": true,
       "label": {
         "en": "Make cumulative in Energy tab"
+      }
+    },
+    {
+      "id": "threePhase",
+      "type": "checkbox",
+      "value": false,
+      "label": {
+        "en": "Report 3-phase if possible"
       }
     },
     {

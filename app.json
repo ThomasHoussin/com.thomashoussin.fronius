@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thomashoussin.fronius",
-  "version": "0.1.1",
+  "version": "0.1.6",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -218,6 +218,7 @@
         "measure_current.DC",
         "measure_voltage.AC",
         "measure_voltage.DC",
+        "measure_frequency",
         "meter_power",
         "meter_power.YEAR",
         "meter_power.TOTAL"
@@ -256,6 +257,11 @@
         "measure_voltage.DC": {
           "title": {
             "en": "DC voltage"
+          }
+        },
+        "measure_frequency": {
+          "title": {
+            "en": "Phase frequency"
           }
         }
       },
@@ -598,6 +604,21 @@
             "en": "Current"
           }
         },
+        "measure_current.phase1": {
+          "title": {
+            "en": "Current P1"
+          }
+        },
+        "measure_current.phase2": {
+          "title": {
+            "en": "Current P2"
+          }
+        },
+        "measure_current.phase3": {
+          "title": {
+            "en": "Current P3"
+          }
+        },
         "measure_voltage": {
           "title": {
             "en": "Voltage"
@@ -674,6 +695,14 @@
           "value": true,
           "label": {
             "en": "Make cumulative in Energy tab"
+          }
+        },
+        {
+          "id": "threePhase",
+          "type": "checkbox",
+          "value": false,
+          "label": {
+            "en": "Report 3-phase if possible"
           }
         },
         {
@@ -815,7 +844,7 @@
       "units": {
         "en": "Hz"
       },
-      "decimals": 0
+      "decimals": 1
     },
     "ohmpilotstate": {
       "type": "enum",
