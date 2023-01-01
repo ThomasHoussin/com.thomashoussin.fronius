@@ -844,7 +844,7 @@
       "units": {
         "en": "Hz"
       },
-      "decimals": 0
+      "decimals": 1
     },
     "ohmpilotstate": {
       "type": "enum",
