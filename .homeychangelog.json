@@ -52,5 +52,8 @@
   },
   "0.1.6": {
     "en": "Added decimal for frequency"
+  },
+  "0.1.7": {
+    "en": "Fixed typo in ohmpilot capability"
   }
 }
