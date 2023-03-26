@@ -55,5 +55,8 @@
   },
   "0.1.7": {
     "en": "Fixed typo in ohmpilot capability"
+  },
+  "0.1.8": {
+    "en": "Fixed empty data bug"
   }
 }
