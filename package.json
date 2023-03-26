@@ -3,11 +3,11 @@
   "version": "0.0.13",
   "main": "app.js",
   "dependencies": {
-    "node-fetch": "^2.6.7",
     "he": "^1.2.0",
-    "node-cron": "^2.0.3"
+    "node-cron": "^2.0.3",
+    "node-fetch": "^2.6.9"
   },
   "devDependencies": {
-    "homey": "^2.30.9"
+    "homey": "^2.33.9"
   }
 }
