@@ -58,5 +58,8 @@
   },
   "0.1.8": {
     "en": "Fixed empty data bug"
+  },
+  "0.1.9": {
+    "en": "Fixed empty data bug w uuid"
   }
 }

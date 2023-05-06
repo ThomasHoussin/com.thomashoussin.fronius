@@ -1,6 +1,15 @@
 <script type="text/javascript">
     Homey.setTitle("Specificy Fronius Datamanager IP/hostname");
 
+    function getUIID() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+        return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
+    }
+
     function doSubmit(){
         let hostname = document.getElementById('hostname').value;
         let name = document.getElementById('name').value;
@@ -14,7 +23,7 @@
                     if (result == 'ok') {
                         let deviceDefinition = {
                             name,
-                            data: { id: 0 },
+                            data: { id: getUIID() },
                             settings: { ip: hostname }
                         };
 
