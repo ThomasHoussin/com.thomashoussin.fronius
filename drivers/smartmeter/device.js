@@ -7,6 +7,24 @@ class Smartmeter extends FroniusDevice {
     async onInit() {
         this.log('Smartmeter has been initialized');
 
+        //checking if adding 3-phase capability is needed
+        if (this.getSetting('threePhase')) {
+            if (!this.hasCapability('measure_current.phase1')) {
+                console.log(`Adding capability measure_current.phase1 to device ${this.getName()}`);
+                this.addCapability('measure_current.phase1');
+            }
+
+            if (!this.hasCapability('measure_current.phase2')) {
+                console.log(`Adding capability measure_current.phase2 to device ${this.getName()}`);
+                this.addCapability('measure_current.phase2');
+            }
+
+            if (!this.hasCapability('measure_current.phase3')) {
+                console.log(`Adding capability measure_current.phase3 to device ${this.getName()}`);
+                this.addCapability('measure_current.phase3');
+            }
+        }
+
         // Enable device polling
         this.polling = true;
         this.addListener('poll', this.pollDevice);

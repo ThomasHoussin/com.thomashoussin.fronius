@@ -64,5 +64,8 @@
   },
   "0.1.10": {
     "en": "Fixed data with 3-phase when creating device (ex : smartmeter)"
+  },
+  "0.1.11": {
+    "en": "Add a check to add 3phase capability if needed in smartmeter"
   }
 }

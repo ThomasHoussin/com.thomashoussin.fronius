@@ -16,6 +16,10 @@ Feel free to donate to  support the project !
 [<img src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif">](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=RVBS24SPLU922&currency_code=EUR)
 
 # Version History
+### 0.1.11:
+	Add a check to add 3phase capability if needed in smartmeter
+### 0.1.10:
+    Fixed data with 3-phase when creating device (ex : smartmeter)
 ### 0.1.9: 
     Fixed empty data bug w uuid
 ### 0.1.7: 
