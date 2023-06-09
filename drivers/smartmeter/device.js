@@ -94,9 +94,16 @@ class Smartmeter extends FroniusDevice {
             if (typeof data.Current_AC_Sum == 'number') current = data.Current_AC_Sum;
             else if (typeof data.Current_AC_Phase_1 == 'number' && typeof data.Current_AC_Phase_2 == 'number' && typeof data.Current_AC_Phase_3 == 'number') current = data.Current_AC_Phase_1 + data.Current_AC_Phase_2 + data.Current_AC_Phase_3;
             this.setCapabilityValue('measure_current', current);
-            if (this.getSetting('threePhase')) {
+
+            if (this.hasCapability('measure_current.phase1')) {
                 if (typeof data.Current_AC_Phase_1 == 'number') this.setCapabilityValue('measure_current.phase1', data.Current_AC_Phase_1);
+            }
+
+            if (this.hasCapability('measure_current.phase2')) {
                 if (typeof data.Current_AC_Phase_2 == 'number') this.setCapabilityValue('measure_current.phase2', data.Current_AC_Phase_2);
+            }
+
+            if (this.hasCapability('measure_current.phase3')) {
                 if (typeof data.Current_AC_Phase_3 == 'number') this.setCapabilityValue('measure_current.phase3', data.Current_AC_Phase_3);
             }
 

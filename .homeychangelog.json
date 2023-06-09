@@ -67,5 +67,8 @@
   },
   "0.1.11": {
     "en": "Add a check to add 3phase capability if needed in smartmeter"
+  },
+  "0.1.12": {
+    "en": "Additional check when updating smartmeter values (3-phase)"
   }
 }
