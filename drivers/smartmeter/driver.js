@@ -20,7 +20,7 @@ function froniusToDevice(json, ip, DeviceId) {
         settings: {
             ip: ip,
             DeviceId: parseInt(DeviceId, 10),
-            threePhase: typeof data.Current_AC_Phase_3 == 'number',
+            threePhase: typeof json.Current_AC_Phase_3 == 'number',
             gen24meterbug: (typeof json.GRID_FREQUENCY_MEAN_F32 == 'undefined' ? false : true),
         },
         data: {
