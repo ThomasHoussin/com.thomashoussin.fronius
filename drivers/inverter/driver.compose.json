@@ -10,6 +10,12 @@
     "measure_current.DC",
     "measure_voltage.AC",
     "measure_voltage.DC",
+    "measure_voltage.DC2",
+    "measure_voltage.DC3",
+    "measure_voltage.DC4",
+    "measure_current.DC2",
+    "measure_current.DC3",
+    "measure_current.DC4",
     "measure_frequency",
     "meter_power",
     "meter_power.YEAR",
@@ -31,11 +37,29 @@
     "measure_current.DC": {
       "title": { "en": "DC current" }
     },
+    "measure_current.DC2": {
+      "title": { "en": "DC current for MPPT tracker 2" }
+    },
+    "measure_current.DC3": {
+      "title": { "en": "DC current for MPPT tracker 3" }
+    },
+    "measure_current.DC4": {
+      "title": { "en": "DC current for MPPT tracker 4" }
+    },
     "measure_voltage.AC": {
       "title": { "en": "AC voltage" }
     },
     "measure_voltage.DC": {
       "title": { "en": "DC voltage" }
+    },
+    "measure_voltage.DC2": {
+      "title": { "en": "DC voltage for MPPT tracker 2" }
+    },
+    "measure_voltage.DC3": {
+      "title": { "en": "DC voltage for MPPT tracker 3" }
+    },
+    "measure_voltage.DC4": {
+      "title": { "en": "DC voltage for MPPT tracker 4" }
     },
     "measure_frequency": {
       "title": { "en": "Phase frequency" }
@@ -93,6 +117,32 @@
           "value": 60,
           "label": {
             "en": "Polling interval in seconds"
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Device type"
+      },
+      "children": [
+        {
+          "id": "DT",
+          "type": "number",
+          "value": 0,
+          "label": {
+            "en": "Device type (the correct value should be autodetected)"
+          }
+        },
+        {
+          "id": "MPPTnumber",
+          "type": "number",
+          "value": 1,
+          "min": 1,
+          "max": 4,
+          "label": {
+            "en": "Number of MPPT tracker to display (1-4)"
           }
         }
       ]

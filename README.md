@@ -16,6 +16,8 @@ Feel free to donate to  support the project !
 [<img src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif">](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=RVBS24SPLU922&currency_code=EUR)
 
 # Version History
+### 0.1.13: 
+    Add detection for GEN24/Tauro ; supports IDC_x and UDC_x for GEN24 and Tauro ; remove now useless GEN24 storage
 ### 0.1.12:
     Additional check when updating smartmeter values (3-phase)
 ### 0.1.11:

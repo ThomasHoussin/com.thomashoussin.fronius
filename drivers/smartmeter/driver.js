@@ -25,7 +25,15 @@ function froniusToDevice(json, ip, DeviceId) {
         },
         data: {
             id: json.Details.Serial,
-        }
+        },
+        capabilities: [
+            "measure_power",
+            "measure_current",
+            "measure_voltage",
+            "measure_frequency",
+            "meter_power",
+            "meter_power.injected",
+        ]
     };
     console.log(device);
     return device;
