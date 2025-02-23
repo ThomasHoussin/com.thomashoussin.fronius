@@ -1,6 +1,6 @@
 {
   "id": "com.thomashoussin.fronius",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -38,7 +38,10 @@
   "contributing": {
     "donate": {
       "paypal": {
-        "username": "thomas.houssin@gmail.com"
+        "username": "thomashoussin958"
+      },
+      "githubSponsors": {
+        "username": "ThomasHoussin"
       }
     }
   },
