@@ -10,7 +10,10 @@
     "measure_voltage",
     "measure_frequency",
     "meter_power",
-    "meter_power.injected"
+    "meter_power.injected",
+    "measure_current.phase1",
+    "measure_current.phase2",
+    "measure_current.phase3"
   ],
   "capabilitiesOptions": {
     "meter_power": {
@@ -39,7 +42,9 @@
     }
   },
   "energy": {
-    "cumulative": true
+    "cumulative": true,
+    "cumulativeImportedCapability": "meter_power",
+    "cumulativeExportedCapability": "meter_power.injected"
   },
   "images": {
     "large": "/drivers/smartmeter/assets/images/large.png",

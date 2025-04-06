@@ -5,9 +5,9 @@
   "dependencies": {
     "he": "^1.2.0",
     "node-cron": "^2.0.3",
-    "node-fetch": "^2.6.11"
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
-    "homey": "^2.34.0"
+    "homey": "^3.7.12"
   }
 }

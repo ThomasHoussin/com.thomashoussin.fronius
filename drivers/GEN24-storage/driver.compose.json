@@ -8,6 +8,7 @@
     "measure_battery",
     "battery_mode"
   ],
+  "deprecated": true,
   "capabilitiesOptions": {
     "measure_battery": {
       "title": { "en": "Relative charged capacity" }

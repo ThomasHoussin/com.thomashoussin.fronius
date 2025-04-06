@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thomashoussin.fronius",
-  "version": "0.1.12",
+  "version": "0.1.14",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -39,7 +39,10 @@
   "contributing": {
     "donate": {
       "paypal": {
-        "username": "thomas.houssin@gmail.com"
+        "username": "thomashoussin958"
+      },
+      "githubSponsors": {
+        "username": "ThomasHoussin"
       }
     }
   },
@@ -59,6 +62,7 @@
         "measure_battery",
         "battery_mode"
       ],
+      "deprecated": true,
       "capabilitiesOptions": {
         "measure_battery": {
           "title": {
@@ -218,6 +222,12 @@
         "measure_current.DC",
         "measure_voltage.AC",
         "measure_voltage.DC",
+        "measure_voltage.DC2",
+        "measure_voltage.DC3",
+        "measure_voltage.DC4",
+        "measure_current.DC2",
+        "measure_current.DC3",
+        "measure_current.DC4",
         "measure_frequency",
         "meter_power",
         "meter_power.YEAR",
@@ -249,6 +259,21 @@
             "en": "DC current"
           }
         },
+        "measure_current.DC2": {
+          "title": {
+            "en": "DC current for MPPT tracker 2"
+          }
+        },
+        "measure_current.DC3": {
+          "title": {
+            "en": "DC current for MPPT tracker 3"
+          }
+        },
+        "measure_current.DC4": {
+          "title": {
+            "en": "DC current for MPPT tracker 4"
+          }
+        },
         "measure_voltage.AC": {
           "title": {
             "en": "AC voltage"
@@ -257,6 +282,21 @@
         "measure_voltage.DC": {
           "title": {
             "en": "DC voltage"
+          }
+        },
+        "measure_voltage.DC2": {
+          "title": {
+            "en": "DC voltage for MPPT tracker 2"
+          }
+        },
+        "measure_voltage.DC3": {
+          "title": {
+            "en": "DC voltage for MPPT tracker 3"
+          }
+        },
+        "measure_voltage.DC4": {
+          "title": {
+            "en": "DC voltage for MPPT tracker 4"
           }
         },
         "measure_frequency": {
@@ -317,6 +357,32 @@
               "value": 60,
               "label": {
                 "en": "Polling interval in seconds"
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Device type"
+          },
+          "children": [
+            {
+              "id": "DT",
+              "type": "number",
+              "value": 0,
+              "label": {
+                "en": "Device type (the correct value should be autodetected)"
+              }
+            },
+            {
+              "id": "MPPTnumber",
+              "type": "number",
+              "value": 1,
+              "min": 1,
+              "max": 4,
+              "label": {
+                "en": "Number of MPPT tracker to display (1-4)"
               }
             }
           ]
@@ -586,7 +652,10 @@
         "measure_voltage",
         "measure_frequency",
         "meter_power",
-        "meter_power.injected"
+        "meter_power.injected",
+        "measure_current.phase1",
+        "measure_current.phase2",
+        "measure_current.phase3"
       ],
       "capabilitiesOptions": {
         "meter_power": {
@@ -631,7 +700,9 @@
         }
       },
       "energy": {
-        "cumulative": true
+        "cumulative": true,
+        "cumulativeImportedCapability": "meter_power",
+        "cumulativeExportedCapability": "meter_power.injected"
       },
       "images": {
         "large": "/drivers/smartmeter/assets/images/large.png",
