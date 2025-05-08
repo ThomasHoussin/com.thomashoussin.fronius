@@ -85,6 +85,10 @@ class Inverter extends FroniusDevice {
     }
 
     updateValues(data) {
+        if (Object.keys(data).length === 0) {
+            throw new Error('No data received from inverter');
+        }
+
         //AC Energy in kWh ; default to 0
         if (this.hasCapability('meter_power'))
             this.setCapabilityValue('meter_power', typeof data.DAY_ENERGY == 'undefined' ? 0 : data.DAY_ENERGY.Value / 1000).catch(this.error);
