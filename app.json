@@ -67,7 +67,8 @@
       "capabilitiesOptions": {
         "measure_battery": {
           "title": {
-            "en": "Relative charged capacity"
+            "en": "Relative charged capacity",
+            "de": "Ladestand"
           }
         },
         "measure_power": {
@@ -144,22 +145,26 @@
       "capabilitiesOptions": {
         "measure_power.PV": {
           "title": {
-            "en": "PV Power"
+            "en": "PV Power",
+            "de": "PV-Leistung"
           }
         },
         "measure_power.GRID": {
           "title": {
-            "en": "Grid Power"
+            "en": "Grid Power",
+            "de": "Netzleistung"
           }
         },
         "measure_power.LOAD": {
           "title": {
-            "en": "Load Power"
+            "en": "Load Power",
+            "de": "Verbrauchsleistung"
           }
         },
         "measure_power.AKKU": {
           "title": {
-            "en": "Akku Power"
+            "en": "Akku Power",
+            "de": "Akku-Leistung"
           }
         }
       },
@@ -235,72 +240,86 @@
       "capabilitiesOptions": {
         "meter_power": {
           "title": {
-            "en": "Daily Production"
+            "en": "Daily Production",
+            "de": "Tägliche Produktion"
           }
         },
         "meter_power.YEAR": {
           "title": {
-            "en": "Yearly Production"
+            "en": "Yearly Production",
+            "de": "Jährliche Produktion"
           }
         },
         "meter_power.TOTAL": {
           "title": {
-            "en": "Total Production"
+            "en": "Total Production",
+            "de": "Gesamtproduktion"
           }
         },
         "measure_current.AC": {
           "title": {
-            "en": "AC current"
+            "en": "AC current",
+            "de": "AC-Strom"
           }
         },
         "measure_current.DC": {
           "title": {
-            "en": "DC current"
+            "en": "DC current",
+            "de": "DC-Strom"
           }
         },
         "measure_current.DC2": {
           "title": {
-            "en": "DC current for MPPT tracker 2"
+            "en": "DC current for MPPT tracker 2",
+            "de": "DC-Strom für MPPT Tracker 2"
           }
         },
         "measure_current.DC3": {
           "title": {
-            "en": "DC current for MPPT tracker 3"
+            "en": "DC current for MPPT tracker 3",
+            "de": "DC-Strom für MPPT Tracker 3"
           }
         },
         "measure_current.DC4": {
           "title": {
-            "en": "DC current for MPPT tracker 4"
+            "en": "DC current for MPPT tracker 4",
+            "de": "DC-Strom für MPPT Tracker 4"
           }
         },
         "measure_voltage.AC": {
           "title": {
-            "en": "AC voltage"
+            "en": "AC voltage",
+            "de": "AC-Spannung"
           }
         },
         "measure_voltage.DC": {
           "title": {
-            "en": "DC voltage"
+            "en": "DC voltage",
+            "de": "DC-Spannung"
           }
         },
         "measure_voltage.DC2": {
           "title": {
-            "en": "DC voltage for MPPT tracker 2"
+            "en": "DC voltage for MPPT tracker 2",
+            "de": "DC-Spannung für MPPT Tracker 2"
           }
         },
         "measure_voltage.DC3": {
           "title": {
-            "en": "DC voltage for MPPT tracker 3"
+            "en": "DC voltage for MPPT tracker 3",
+            "de": "DC-Spannung für MPPT Tracker 3"
           }
         },
         "measure_voltage.DC4": {
           "title": {
-            "en": "DC voltage for MPPT tracker 4"
+            "en": "DC voltage for MPPT tracker 4",
+            "de": "DC-Spannung für MPPT Tracker 4"
           }
         },
         "measure_frequency": {
           "title": {
-            "en": "Phase frequency"
+            "en": "Phase frequency",
+            "de": "Frequenz"
           }
         }
       },
@@ -410,17 +429,20 @@
       "capabilitiesOptions": {
         "measure_power": {
           "title": {
-            "en": "Actual power consumption"
+            "en": "Actual power consumption",
+            "de": "Aktueller Stromverbrauch"
           }
         },
         "meter_power": {
           "title": {
-            "en": "Total consumed energy"
+            "en": "Total consumed energy",
+            "de": "Gesamter Energieverbrauch"
           }
         },
         "measure_temperature": {
           "title": {
-            "en": "Temperature from sensor"
+            "en": "Temperature from sensor",
+            "de": "Sensortemperatur"
           }
         }
       },
@@ -505,52 +527,62 @@
       "capabilitiesOptions": {
         "meter_power.fromGrid": {
           "title": {
-            "en": "Energy from grid"
+            "en": "Energy from grid",
+            "de": "Bezogene Energie"
           }
         },
         "meter_power.toGrid": {
           "title": {
-            "en": "Energy injected"
+            "en": "Energy injected",
+            "de": "Eingespeiste Energie"
           }
         },
         "meter_power.produced": {
           "title": {
-            "en": "Energy produced"
+            "en": "Energy produced",
+            "de": "Erzeugte Energie"
           }
         },
         "selfconsumption": {
           "title": {
-            "en": "Self-consumption rate"
+            "en": "Self-consumption rate",
+            "de": "Eigenverbrauchsrate"
           }
         },
         "selfconsumption.month": {
           "title": {
-            "en": "Month self-consumption rate"
+            "en": "Month self-consumption rate",
+            "de": "Monatliche Eigenverbrauchsrate"
           }
         },
         "spending.day": {
           "title": {
-            "en": "Today spending"
+            "en": "Today spending",
+            "de": "Heutige Kosten"
           }
         },
         "savings.day": {
           "title": {
-            "en": "Today savings"
+            "en": "Today savings",
+            "de": "Heutige Einsparung"
           }
         },
         "spending.month": {
           "title": {
-            "en": "Month spending"
+            "en": "Month spending",
+            "de": "Monatliche Kosten"
           }
         },
         "spending.previousmonth": {
           "title": {
-            "en": "Previous month spending"
+            "en": "Previous month spending",
+            "de": "Kosten des vorherigen Monats"
           }
         },
         "savings.month": {
           "title": {
-            "en": "Month savings"
+            "en": "Month savings",
+            "de": "Monatliche Einsparung"
           }
         },
         "button.recoverHistory": {
@@ -659,42 +691,50 @@
       "capabilitiesOptions": {
         "meter_power": {
           "title": {
-            "en": "Energy consumed"
+            "en": "Energy consumed",
+            "de": "Bezogene Energie"
           }
         },
         "meter_power.injected": {
           "title": {
-            "en": "Energy injected"
+            "en": "Energy injected",
+            "de": "Eingespeiste Energie"
           }
         },
         "measure_current": {
           "title": {
-            "en": "Current"
+            "en": "Current",
+            "de": "Strom"
           }
         },
         "measure_current.phase1": {
           "title": {
-            "en": "Current P1"
+            "en": "Current P1",
+            "de": "Strom P1"
           }
         },
         "measure_current.phase2": {
           "title": {
-            "en": "Current P2"
+            "en": "Current P2",
+            "de": "Strom P2"
           }
         },
         "measure_current.phase3": {
           "title": {
-            "en": "Current P3"
+            "en": "Current P3",
+            "de": "Strom P3"
           }
         },
         "measure_voltage": {
           "title": {
-            "en": "Voltage"
+            "en": "Voltage",
+            "de": "Spannung"
           }
         },
         "measure_frequency": {
           "title": {
-            "en": "Phase frequency"
+            "en": "Phase frequency",
+            "de": "Frequenz"
           }
         }
       },
@@ -802,22 +842,26 @@
       "capabilitiesOptions": {
         "measure_current": {
           "title": {
-            "en": "Battery output current"
+            "en": "Battery output current",
+            "de": "Ausgangsstrom"
           }
         },
         "measure_voltage": {
           "title": {
-            "en": "Battery output voltage"
+            "en": "Battery output voltage",
+            "de": "Spannung"
           }
         },
         "measure_temperature": {
           "title": {
-            "en": "Temperature"
+            "en": "Temperature",
+            "de": "Temperatur"
           }
         },
         "measure_battery": {
           "title": {
-            "en": "Relative charged capacity"
+            "en": "Relative charged capacity",
+            "de": "Ladestand"
           }
         },
         "measure_power": {
