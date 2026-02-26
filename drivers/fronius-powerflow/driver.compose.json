@@ -13,16 +13,16 @@
 	],
 	"capabilitiesOptions": {
 		"measure_power.PV": {
-			"title": { "en": "PV Power" }
+			"title": { "en": "PV Power", "de": "PV-Leistung" }
 		},
 		"measure_power.GRID": {
-			"title": { "en": "Grid Power" }
+			"title": { "en": "Grid Power", "de": "Netzleistung" }
 		},
 		"measure_power.LOAD": {
-			"title": { "en": "Load Power" }
+			"title": { "en": "Load Power", "de": "Verbrauchsleistung" }
 		},
 		"measure_power.AKKU": {
-			"title": { "en": "Akku Power" }
+			"title": { "en": "Akku Power", "de": "Akku-Leistung" }
 		}
 	},
 	"energy": {

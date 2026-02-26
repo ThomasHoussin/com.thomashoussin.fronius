@@ -12,13 +12,13 @@
 	],
 	"capabilitiesOptions": {
 		"measure_power": {
-			"title": { "en": "Actual power consumption" }
+			"title": { "en": "Actual power consumption", "de": "Aktueller Stromverbrauch" }
 		},
 		"meter_power": {
-			"title": { "en": "Total consumed energy" }
+			"title": { "en": "Total consumed energy", "de": "Gesamter Energieverbrauch" }
 		},
 		"measure_temperature": {
-			"title": { "en": "Temperature from sensor" }
+			"title": { "en": "Temperature from sensor", "de": "Sensortemperatur" }
 		}
 	},
 	"images": {

@@ -8,7 +8,7 @@
 	"deprecated": true,
 	"capabilitiesOptions": {
 		"measure_battery": {
-			"title": { "en": "Relative charged capacity" }
+			"title": { "en": "Relative charged capacity", "de": "Ladestand" }
 		},
 		"measure_power": {
 			"approximated": false

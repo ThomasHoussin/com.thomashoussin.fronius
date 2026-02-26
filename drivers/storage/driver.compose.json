@@ -14,16 +14,16 @@
 	],
 	"capabilitiesOptions": {
 		"measure_current": {
-			"title": { "en": "Battery output current" }
+			"title": { "en": "Battery output current", "de": "Ausgangsstrom" }
 		},
 		"measure_voltage": {
-			"title": { "en": "Battery output voltage" }
+			"title": { "en": "Battery output voltage", "de": "Spannung" }
 		},
 		"measure_temperature": {
-			"title": { "en": "Temperature" }
+			"title": { "en": "Temperature", "de": "Temperatur" }
 		},
 		"measure_battery": {
-			"title": { "en": "Relative charged capacity" }
+			"title": { "en": "Relative charged capacity", "de": "Ladestand" }
 		},
 		"measure_power": {
 			"approximated": true
