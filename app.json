@@ -232,6 +232,9 @@
         "meter_power.YEAR",
         "meter_power.TOTAL"
       ],
+      "energy": {
+        "meterPowerExportedCapability": "meter_power.TOTAL"
+      },
       "capabilitiesOptions": {
         "meter_power": {
           "title": {
@@ -701,7 +704,9 @@
       "energy": {
         "cumulative": true,
         "cumulativeImportedCapability": "meter_power",
-        "cumulativeExportedCapability": "meter_power.injected"
+        "cumulativeExportedCapability": "meter_power.injected",
+        "meterPowerImportedCapability": "meter_power",
+        "meterPowerExportedCapability": "meter_power.injected"
       },
       "images": {
         "large": "/drivers/smartmeter/assets/images/large.png",
