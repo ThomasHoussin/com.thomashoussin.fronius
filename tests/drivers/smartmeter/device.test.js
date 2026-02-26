@@ -12,8 +12,8 @@ class TestSmartmeter extends Smartmeter {
 			"measure_current",
 			"measure_voltage",
 			"measure_frequency",
-			"meter_power",
-			"meter_power.injected",
+			"meter_power.imported",
+			"meter_power.exported",
 		]);
 		this._capabilityValues = new Map();
 		this._settings = {
@@ -170,8 +170,8 @@ describe("Smartmeter", () => {
 
 			device.updateValues(data);
 
-			expect(device.getCapabilityValue("meter_power")).toBe(5000);
-			expect(device.getCapabilityValue("meter_power.injected")).toBe(2000);
+			expect(device.getCapabilityValue("meter_power.imported")).toBe(5000);
+			expect(device.getCapabilityValue("meter_power.exported")).toBe(2000);
 			expect(device.getCapabilityValue("measure_power")).toBe(1500);
 			expect(device.getCapabilityValue("measure_current")).toBe(6.5);
 			expect(device.getCapabilityValue("measure_voltage")).toBe(230);
@@ -242,8 +242,8 @@ describe("Smartmeter", () => {
 
 			device.updateValues(data);
 
-			expect(device.getCapabilityValue("meter_power")).toBe(0);
-			expect(device.getCapabilityValue("meter_power.injected")).toBe(0);
+			expect(device.getCapabilityValue("meter_power.imported")).toBe(0);
+			expect(device.getCapabilityValue("meter_power.exported")).toBe(0);
 			expect(device.getCapabilityValue("measure_power")).toBe(0);
 			expect(device.getCapabilityValue("measure_current")).toBe(0);
 			expect(device.getCapabilityValue("measure_voltage")).toBe(0);
@@ -318,8 +318,8 @@ describe("Smartmeter", () => {
 
 			device.updateValues(data);
 
-			expect(device.getCapabilityValue("meter_power")).toBe(5000);
-			expect(device.getCapabilityValue("meter_power.injected")).toBe(2000);
+			expect(device.getCapabilityValue("meter_power.imported")).toBe(5000);
+			expect(device.getCapabilityValue("meter_power.exported")).toBe(2000);
 			expect(device.getCapabilityValue("measure_power")).toBe(1500);
 			expect(device.getCapabilityValue("measure_frequency")).toBe(50.02);
 		});
@@ -367,8 +367,8 @@ describe("Smartmeter", () => {
 
 			device.updateValues(data);
 
-			expect(device.getCapabilityValue("meter_power")).toBe(0);
-			expect(device.getCapabilityValue("meter_power.injected")).toBe(0);
+			expect(device.getCapabilityValue("meter_power.imported")).toBe(0);
+			expect(device.getCapabilityValue("meter_power.exported")).toBe(0);
 			expect(device.getCapabilityValue("measure_power")).toBe(0);
 			expect(device.getCapabilityValue("measure_frequency")).toBe(0);
 		});
@@ -384,8 +384,8 @@ describe("Smartmeter", () => {
 
 			device.updateValues(data);
 
-			expect(device.getCapabilityValue("meter_power")).toBe(0);
-			expect(device.getCapabilityValue("meter_power.injected")).toBe(0);
+			expect(device.getCapabilityValue("meter_power.imported")).toBe(0);
+			expect(device.getCapabilityValue("meter_power.exported")).toBe(0);
 			expect(device.getCapabilityValue("measure_power")).toBe(0);
 		});
 
@@ -408,7 +408,7 @@ describe("Smartmeter", () => {
 
 			device.updateValues(data);
 
-			expect(device.getCapabilityValue("meter_power")).toBe(100000);
+			expect(device.getCapabilityValue("meter_power.imported")).toBe(100000);
 		});
 	});
 });

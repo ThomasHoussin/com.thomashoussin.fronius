@@ -97,19 +97,19 @@ class Smartmeter extends FroniusDevice {
 	updateValues(data) {
 		if (!this.getSetting("gen24meterbug")) {
 			//Consumed Energy in kWh ; default to 0 ; should be given by EnergyReal_WAC_Plus_Absolute
-			this.setCapabilityValue(
-				"meter_power",
-				typeof data.EnergyReal_WAC_Plus_Absolute === "undefined"
+			const imported_energy = typeof data.EnergyReal_WAC_Plus_Absolute === "undefined"
 					? 0
-					: data.EnergyReal_WAC_Plus_Absolute / 1000,
-			);
+					: data.EnergyReal_WAC_Plus_Absolute / 1000;
+			this.setCapabilityValue("meter_power.imported", imported_energy).catch(() => {
+				this.setCapabilityValue("meter_power", imported_energy);
+			});
 			//Injected energy ; EnergyReal_WAC_Minus_Absolute
-			this.setCapabilityValue(
-				"meter_power.injected",
-				typeof data.EnergyReal_WAC_Minus_Absolute === "undefined"
+			const exported_energy = typeof data.EnergyReal_WAC_Minus_Absolute === "undefined"
 					? 0
-					: data.EnergyReal_WAC_Minus_Absolute / 1000,
-			);
+					: data.EnergyReal_WAC_Minus_Absolute / 1000;
+			this.setCapabilityValue("meter_power.exported", exported_energy).catch(() => {
+				this.setCapabilityValue("meter_power.injected", exported_energy);
+			});
 
 			//power, in W ; default to 0
 			this.setCapabilityValue(
@@ -185,19 +185,19 @@ class Smartmeter extends FroniusDevice {
 			//workaround for strange field values in some GEN24 firmware
 
 			//Consumed Energy in kWh ; default to 0 ; should be given by EnergyReal_WAC_Plus_Absolute
-			this.setCapabilityValue(
-				"meter_power",
-				typeof data.SMARTMETER_ENERGYACTIVE_ABSOLUT_PLUS_F64 === "undefined"
+			const imported_energy = typeof data.SMARTMETER_ENERGYACTIVE_ABSOLUT_PLUS_F64 === "undefined"
 					? 0
-					: data.SMARTMETER_ENERGYACTIVE_ABSOLUT_PLUS_F64 / 1000,
-			);
+					: data.SMARTMETER_ENERGYACTIVE_ABSOLUT_PLUS_F64 / 1000;
+			this.setCapabilityValue("meter_power.imported", imported_energy).catch(() => {
+				this.setCapabilityValue("meter_power", imported_energy);
+			});
 			//Injected energy ; EnergyReal_WAC_Minus_Absolute
-			this.setCapabilityValue(
-				"meter_power.injected",
-				typeof data.SMARTMETER_ENERGYACTIVE_ABSOLUT_MINUS_F64 === "undefined"
+			const exported_energy = typeof data.SMARTMETER_ENERGYACTIVE_ABSOLUT_MINUS_F64 === "undefined"
 					? 0
-					: data.SMARTMETER_ENERGYACTIVE_ABSOLUT_MINUS_F64 / 1000,
-			);
+					: data.SMARTMETER_ENERGYACTIVE_ABSOLUT_MINUS_F64 / 1000;
+			this.setCapabilityValue("meter_power.exported", exported_energy).catch(() => {
+				this.setCapabilityValue("meter_power.injected", exported_energy);
+			});
 
 			//power, in W ; default to 0
 			this.setCapabilityValue(

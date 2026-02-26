@@ -27,8 +27,8 @@ function froniusToDevice(json, ip, DeviceId) {
 			"measure_current",
 			"measure_voltage",
 			"measure_frequency",
-			"meter_power",
-			"meter_power.injected",
+			"meter_power.imported",
+			"meter_power.exported",
 		],
 	};
 	console.log(device);
