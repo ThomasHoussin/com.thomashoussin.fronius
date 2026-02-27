@@ -30,13 +30,6 @@ function froniusToDevice(json, ip, DeviceId) {
 			"meter_power",
 			"meter_power.injected",
 		],
-		energy: {
-			cumulative: true,
-			cumulativeImportedCapability: "meter_power",
-			cumulativeExportedCapability: "meter_power.injected",
-			meterPowerImportedCapability: "meter_power",
-			meterPowerExportedCapability: "meter_power.injected",
-		},
 	};
 	console.log(device);
 	return device;
