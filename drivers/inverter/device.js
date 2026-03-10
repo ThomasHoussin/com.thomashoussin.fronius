@@ -111,11 +111,76 @@ class Inverter extends FroniusDevice {
 				? 0
 				: data.TOTAL_ENERGY.Value / 1000,
 		).catch(this.error);
-		//AC power ; default to 0
-		this.setCapabilityValue(
-			"measure_power",
-			typeof data.PAC === "undefined" ? 0 : data.PAC.Value,
-		).catch(this.error);
+
+		// PV power (from DC side) for measure_power
+		const dt = this.getSetting("DT");
+		let mppt = this.getSetting("MPPTnumber");
+		if (!mppt || typeof mppt !== "number") mppt = 1;
+		if (dt !== 1) mppt = 1;
+
+		let pvPower = 0;
+		let hasDcData = false;
+
+		if (dt === 1) {
+			for (let i = 1; i <= mppt; i++) {
+				const currentField =
+					i === 1
+						? data.IDC
+						: data[`IDC_${i}`];
+				const voltageField =
+					i === 1
+						? data.UDC
+						: data[`UDC_${i}`];
+
+				const currentValue =
+					currentField && typeof currentField.Value === "number"
+						? currentField.Value
+						: undefined;
+				const voltageValue =
+					voltageField && typeof voltageField.Value === "number"
+						? voltageField.Value
+						: undefined;
+
+				if (
+					typeof currentValue === "number" &&
+					typeof voltageValue === "number"
+				) {
+					pvPower += currentValue * voltageValue;
+					hasDcData = true;
+				}
+			}
+		} else {
+			const currentField = data.IDC;
+			const voltageField = data.UDC;
+			const currentValue =
+				currentField && typeof currentField.Value === "number"
+					? currentField.Value
+					: undefined;
+			const voltageValue =
+				voltageField && typeof voltageField.Value === "number"
+					? voltageField.Value
+					: undefined;
+
+			if (
+				typeof currentValue === "number" &&
+				typeof voltageValue === "number"
+			) {
+				pvPower = currentValue * voltageValue;
+				hasDcData = true;
+			}
+		}
+
+		const acPowerField = data.PAC;
+		const acPowerValue =
+			acPowerField && typeof acPowerField.Value === "number"
+				? acPowerField.Value
+				: 0;
+
+		const measurePower = hasDcData ? pvPower : acPowerValue;
+
+		this.setCapabilityValue("measure_power", measurePower).catch(
+			this.error,
+		);
 		//AC current ; default to 0
 		this.setCapabilityValue(
 			"measure_current.AC",

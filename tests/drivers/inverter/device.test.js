@@ -300,12 +300,29 @@ describe("Inverter", () => {
 			expect(device.getCapabilityValue("meter_power")).toBe(15);
 			expect(device.getCapabilityValue("meter_power.YEAR")).toBe(5000);
 			expect(device.getCapabilityValue("meter_power.TOTAL")).toBe(25000);
-			expect(device.getCapabilityValue("measure_power")).toBe(2500);
+			// PV power = UDC * IDC = 320 * 8.5 = 2720
+			expect(device.getCapabilityValue("measure_power")).toBe(2720);
 			expect(device.getCapabilityValue("measure_current.AC")).toBe(10.8);
 			expect(device.getCapabilityValue("measure_voltage.AC")).toBe(230);
 			expect(device.getCapabilityValue("measure_current.DC")).toBe(8.5);
 			expect(device.getCapabilityValue("measure_voltage.DC")).toBe(320);
 			expect(device.getCapabilityValue("measure_frequency")).toBe(50.02);
+		});
+
+		it("should fall back to PAC when DC data is missing", () => {
+			const data = {
+				DAY_ENERGY: { Value: 15000 },
+				YEAR_ENERGY: { Value: 5000000 },
+				TOTAL_ENERGY: { Value: 25000000 },
+				PAC: { Value: 2500 },
+				IAC: { Value: 10.8 },
+				UAC: { Value: 230 },
+				FAC: { Value: 50.02 },
+			};
+
+			device.updateValues(data);
+
+			expect(device.getCapabilityValue("measure_power")).toBe(2500);
 		});
 
 		it("should default to 0 for undefined fields", () => {
@@ -354,6 +371,8 @@ describe("Inverter", () => {
 			expect(device.getCapabilityValue("measure_voltage.DC")).toBe(350);
 			expect(device.getCapabilityValue("measure_current.DC2")).toBe(7.5);
 			expect(device.getCapabilityValue("measure_voltage.DC2")).toBe(345);
+			// PV power = sum(UDC_i * IDC_i) = 350*8.0 + 345*7.5 = 5387.5
+			expect(device.getCapabilityValue("measure_power")).toBe(5387.5);
 		});
 
 		it("should default MPPT values to 0 when undefined", () => {
@@ -367,6 +386,19 @@ describe("Inverter", () => {
 
 			expect(device.getCapabilityValue("measure_current.DC2")).toBe(0);
 			expect(device.getCapabilityValue("measure_voltage.DC2")).toBe(0);
+		});
+
+		it("should fall back to PAC when all DC data is missing", () => {
+			const data = {
+				PAC: { Value: 5000 },
+				IAC: { Value: 21.7 },
+				UAC: { Value: 230 },
+				FAC: { Value: 50.0 },
+			};
+
+			device.updateValues(data);
+
+			expect(device.getCapabilityValue("measure_power")).toBe(5000);
 		});
 
 		it("should not try to set meter_power when capability is removed", () => {
