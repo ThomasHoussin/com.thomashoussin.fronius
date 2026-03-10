@@ -1,5 +1,35 @@
 import FroniusDevice from "../../lib/device.js";
 
+/** StatusCode mapping from Fronius Solar API 4.6.5 */
+const STATUS_CODE_MAP = {
+	0: "Startup",
+	1: "Startup",
+	2: "Startup",
+	3: "Startup",
+	4: "Startup",
+	5: "Startup",
+	6: "Startup",
+	7: "Running",
+	8: "Standby",
+	9: "Bootloading",
+	10: "Error",
+	11: "Idle",
+	12: "Ready",
+	13: "Sleeping",
+	255: "Unknown",
+};
+
+function parseStatusCode(code) {
+	if (code === undefined || code === null) return "Unknown";
+	if (typeof code === "string") return code;
+	return STATUS_CODE_MAP[code] ?? "Unknown";
+}
+
+function parseErrorCode(code) {
+	if (code === undefined || code === null || code === 0) return "No error";
+	return `Error ${code}`;
+}
+
 class Inverter extends FroniusDevice {
 	/**
 	 * onInit is called when the device is initialized.
@@ -14,6 +44,20 @@ class Inverter extends FroniusDevice {
 				`Adding capability measure_frequency to device ${this.getName()}`,
 			);
 			this.addCapability("measure_frequency");
+		}
+
+		if (!this.hasCapability("fronius_inverter_state")) {
+			console.log(
+				`Adding capability fronius_inverter_state to device ${this.getName()}`,
+			);
+			this.addCapability("fronius_inverter_state");
+		}
+		
+		if (!this.hasCapability("fronius_error_code")) {
+			console.log(
+				`Adding capability fronius_error_code to device ${this.getName()}`,
+			);
+			this.addCapability("fronius_error_code");
 		}
 
 		//checking if DT is GEN24 or Tauro
@@ -155,6 +199,23 @@ class Inverter extends FroniusDevice {
 			"measure_frequency",
 			typeof data.FAC === "undefined" ? 0 : data.FAC.Value,
 		).catch(this.error);
+		//DeviceStatus: human-readable inverter state and error
+		const status = data.DeviceStatus;
+		if (status && this.hasCapability("fronius_inverter_state")) {
+			const stateText =
+				typeof status.InverterState === "string"
+					? status.InverterState
+					: parseStatusCode(status.StatusCode);
+			this.setCapabilityValue("fronius_inverter_state", stateText).catch(
+				this.error,
+			);
+		}
+		if (status && this.hasCapability("fronius_error_code")) {
+			const errorText = parseErrorCode(status.ErrorCode);
+			this.setCapabilityValue("fronius_error_code", errorText).catch(
+				this.error,
+			);
+		}
 	}
 }
 

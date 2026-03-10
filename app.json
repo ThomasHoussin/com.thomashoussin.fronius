@@ -139,7 +139,10 @@
         "measure_power.PV",
         "measure_power.GRID",
         "measure_power.LOAD",
-        "measure_power.AKKU"
+        "measure_power.AKKU",
+        "fronius_backup_mode",
+        "fronius_autonomy",
+        "fronius_self_consumption"
       ],
       "capabilitiesOptions": {
         "measure_power.PV": {
@@ -160,6 +163,21 @@
         "measure_power.AKKU": {
           "title": {
             "en": "Akku Power"
+          }
+        },
+        "fronius_backup_mode": {
+          "title": {
+            "en": "Backup mode"
+          }
+        },
+        "fronius_autonomy": {
+          "title": {
+            "en": "Autonomy"
+          }
+        },
+        "fronius_self_consumption": {
+          "title": {
+            "en": "Self-consumption"
           }
         }
       },
@@ -230,7 +248,9 @@
         "measure_frequency",
         "meter_power",
         "meter_power.YEAR",
-        "meter_power.TOTAL"
+        "meter_power.TOTAL",
+        "fronius_inverter_state",
+        "fronius_error_code"
       ],
       "capabilitiesOptions": {
         "meter_power": {
@@ -301,6 +321,16 @@
         "measure_frequency": {
           "title": {
             "en": "Phase frequency"
+          }
+        },
+        "fronius_inverter_state": {
+          "title": {
+            "en": "Inverter state"
+          }
+        },
+        "fronius_error_code": {
+          "title": {
+            "en": "Error code"
           }
         }
       },
@@ -895,6 +925,62 @@
       "getable": true,
       "setable": false,
       "icon": "/assets/information.svg"
+    },
+    "fronius_autonomy": {
+      "type": "number",
+      "title": {
+        "en": "Autonomy"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/selfconsumption.svg",
+      "insights": true,
+      "units": {
+        "en": "%"
+      },
+      "decimals": 1
+    },
+    "fronius_backup_mode": {
+      "type": "boolean",
+      "title": {
+        "en": "Backup mode"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/information.svg",
+      "insights": true
+    },
+    "fronius_error_code": {
+      "type": "string",
+      "title": {
+        "en": "Error code"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/information.svg"
+    },
+    "fronius_inverter_state": {
+      "type": "string",
+      "title": {
+        "en": "Inverter state"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/information.svg"
+    },
+    "fronius_self_consumption": {
+      "type": "number",
+      "title": {
+        "en": "Self-consumption"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/selfconsumption.svg",
+      "insights": true,
+      "units": {
+        "en": "%"
+      },
+      "decimals": 1
     },
     "measure_frequency": {
       "type": "number",

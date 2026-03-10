@@ -447,4 +447,62 @@ describe("Inverter", () => {
 			expect(device.getCapabilityValue("meter_power.TOTAL")).toBe(100000000);
 		});
 	});
+
+	describe("updateValues - DeviceStatus", () => {
+		beforeEach(() => {
+			device._capabilities.add("fronius_inverter_state");
+			device._capabilities.add("fronius_error_code");
+		});
+
+		it("should set inverter state from InverterState string (GEN24)", () => {
+			const data = {
+				DeviceStatus: {
+					ErrorCode: 0,
+					InverterState: "Running",
+					StatusCode: 7,
+				},
+			};
+
+			device.updateValues(data);
+
+			expect(device.getCapabilityValue("fronius_inverter_state")).toBe(
+				"Running",
+			);
+			expect(device.getCapabilityValue("fronius_error_code")).toBe("No error");
+		});
+
+		it("should set inverter state from StatusCode when InverterState missing (Classic)", () => {
+			const data = {
+				DeviceStatus: {
+					ErrorCode: 0,
+					StatusCode: 7,
+				},
+			};
+
+			device.updateValues(data);
+
+			expect(device.getCapabilityValue("fronius_inverter_state")).toBe(
+				"Running",
+			);
+		});
+
+		it("should show error text when ErrorCode non-zero", () => {
+			const data = {
+				DeviceStatus: {
+					ErrorCode: 42,
+					StatusCode: 10,
+					InverterState: "Error",
+				},
+			};
+
+			device.updateValues(data);
+
+			expect(device.getCapabilityValue("fronius_error_code")).toBe(
+				"Error 42",
+			);
+			expect(device.getCapabilityValue("fronius_inverter_state")).toBe(
+				"Error",
+			);
+		});
+	});
 });

@@ -19,7 +19,9 @@
 		"measure_frequency",
 		"meter_power",
 		"meter_power.YEAR",
-		"meter_power.TOTAL"
+		"meter_power.TOTAL",
+		"fronius_inverter_state",
+		"fronius_error_code"
 	],
 	"capabilitiesOptions": {
 		"meter_power": {
@@ -63,6 +65,12 @@
 		},
 		"measure_frequency": {
 			"title": { "en": "Phase frequency" }
+		},
+		"fronius_inverter_state": {
+			"title": { "en": "Inverter state" }
+		},
+		"fronius_error_code": {
+			"title": { "en": "Error code" }
 		}
 	},
 	"images": {

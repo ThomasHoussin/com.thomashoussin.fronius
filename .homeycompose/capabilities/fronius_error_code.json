@@ -1,0 +1,9 @@
+{
+	"type": "string",
+	"title": {
+		"en": "Error code"
+	},
+	"getable": true,
+	"setable": false,
+	"icon": "/assets/information.svg"
+}

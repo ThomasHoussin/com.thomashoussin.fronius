@@ -13,6 +13,7 @@ class TestStorageDevice extends StorageDevice {
 			"measure_temperature",
 			"measure_battery",
 			"measure_power",
+			"battery_charging_state"
 		]);
 		this._capabilityValues = new Map();
 		this._settings = {

@@ -1,0 +1,10 @@
+{
+	"type": "boolean",
+	"title": {
+		"en": "Backup mode"
+	},
+	"getable": true,
+	"setable": false,
+	"icon": "/assets/information.svg",
+	"insights": true
+}

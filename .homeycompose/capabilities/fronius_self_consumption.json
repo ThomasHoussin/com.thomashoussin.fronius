@@ -1,0 +1,14 @@
+{
+	"type": "number",
+	"title": {
+		"en": "Self-consumption"
+	},
+	"getable": true,
+	"setable": false,
+	"icon": "/assets/selfconsumption.svg",
+	"insights": true,
+	"units": {
+		"en": "%"
+	},
+	"decimals": 1
+}
