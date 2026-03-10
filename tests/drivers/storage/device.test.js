@@ -13,6 +13,10 @@ class TestStorageDevice extends StorageDevice {
 			"measure_temperature",
 			"measure_battery",
 			"measure_power",
+			"battery_charging_state",
+			"meter_power",
+			"meter_power.charged",
+			"meter_power.discharged",
 		]);
 		this._capabilityValues = new Map();
 		this._settings = {
@@ -21,6 +25,7 @@ class TestStorageDevice extends StorageDevice {
 			polling_interval: 300,
 		};
 		this._listeners = new Map();
+		this._store = new Map();
 		this.polling = false;
 	}
 
@@ -51,6 +56,13 @@ class TestStorageDevice extends StorageDevice {
 	}
 	getName() {
 		return "Test Storage";
+	}
+	getStoreValue(key) {
+		return this._store.get(key);
+	}
+	setStoreValue(key, value) {
+		this._store.set(key, value);
+		return Promise.resolve();
 	}
 	log() {}
 	error() {}
@@ -102,20 +114,23 @@ describe("StorageDevice", () => {
 			expect(device.hasCapability("battery_charging_state")).toBe(true);
 		});
 
-		it("should remove deprecated meter_power capability", async () => {
-			device._capabilities.add("meter_power");
+		it("should ensure cumulative energy capabilities exist and initialize from store", async () => {
+			device._capabilities.delete("meter_power");
+			device._capabilities.delete("meter_power.charged");
+			device._capabilities.delete("meter_power.discharged");
+			device._store.set("meter_power", 1.5);
+			device._store.set("meter_power.charged", 1.0);
+			device._store.set("meter_power.discharged", 0.5);
 			device.pollDevice = vi.fn();
 
 			await device.onInit();
 
-			expect(device.hasCapability("meter_power")).toBe(false);
-		});
-
-		it("should not throw if meter_power not present", async () => {
-			device._capabilities.delete("meter_power");
-			device.pollDevice = vi.fn();
-
-			await expect(device.onInit()).resolves.not.toThrow();
+			expect(device.hasCapability("meter_power")).toBe(true);
+			expect(device.hasCapability("meter_power.charged")).toBe(true);
+			expect(device.hasCapability("meter_power.discharged")).toBe(true);
+			expect(device.getCapabilityValue("meter_power")).toBe(1.5);
+			expect(device.getCapabilityValue("meter_power.charged")).toBe(1.0);
+			expect(device.getCapabilityValue("meter_power.discharged")).toBe(0.5);
 		});
 
 		it("should enable polling", async () => {
@@ -299,6 +314,58 @@ describe("StorageDevice", () => {
 			expect(device.getCapabilityValue("measure_battery")).toBe(0);
 			expect(device.getCapabilityValue("measure_power")).toBe(0);
 			expect(device.getCapabilityValue("battery_charging_state")).toBe("idle");
+		});
+	});
+
+	describe("updateValues - cumulative energy", () => {
+		it("should accumulate imported, exported and total energy for positive power", () => {
+			// 48.5 V * 5.2 A = 252.2 W, interval 300 s => ~0.0210 kWh per call
+			const data = {
+				Controller: {
+					Voltage_DC: 48.5,
+					Current_DC: 5.2,
+					Temperature_Cell: 25,
+					StateOfCharge_Relative: 75,
+				},
+			};
+
+			device.updateValues(data);
+			device.updateValues(data);
+
+			const total = device.getCapabilityValue("meter_power");
+			const imported = device.getCapabilityValue("meter_power.charged");
+			const exported = device.getCapabilityValue("meter_power.discharged");
+
+			const expectedDeltaPerCall = (252.2 * 300) / 3600 / 1000;
+
+			expect(total).toBeCloseTo(2 * expectedDeltaPerCall, 5);
+			expect(imported).toBeCloseTo(2 * expectedDeltaPerCall, 5);
+			expect(exported).toBeCloseTo(0, 5);
+		});
+
+		it("should accumulate exported and total energy for negative power", () => {
+			const data = {
+				Controller: {
+					Voltage_DC: 48.5,
+					Current_DC: -3.0,
+					Temperature_Cell: 25,
+					StateOfCharge_Relative: 50,
+				},
+			};
+
+			device.updateValues(data);
+			device.updateValues(data);
+
+			const total = device.getCapabilityValue("meter_power");
+			const imported = device.getCapabilityValue("meter_power.charged");
+			const exported = device.getCapabilityValue("meter_power.discharged");
+
+			// 48.5 * 3.0 = 145.5 W
+			const expectedDeltaPerCall = (145.5 * 300) / 3600 / 1000;
+
+			expect(total).toBeCloseTo(2 * expectedDeltaPerCall, 5);
+			expect(exported).toBeCloseTo(2 * expectedDeltaPerCall, 5);
+			expect(imported).toBeCloseTo(0, 5);
 		});
 	});
 });

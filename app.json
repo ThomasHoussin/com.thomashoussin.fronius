@@ -797,7 +797,10 @@
         "measure_voltage",
         "measure_battery",
         "measure_temperature",
-        "battery_charging_state"
+        "battery_charging_state",
+        "meter_power",
+        "meter_power.charged",
+        "meter_power.discharged"
       ],
       "capabilitiesOptions": {
         "measure_current": {
@@ -822,10 +825,27 @@
         },
         "measure_power": {
           "approximated": true
+        },
+        "meter_power": {
+          "title": {
+            "en": "Total throughput"
+          }
+        },
+        "meter_power.charged": {
+          "title": {
+            "en": "Charged energy"
+          }
+        },
+        "meter_power.discharged": {
+          "title": {
+            "en": "Discharged energy"
+          }
         }
       },
       "energy": {
-        "homeBattery": true
+        "homeBattery": true,
+        "meterPowerImportedCapability": "meter_power.charged",
+        "meterPowerExportedCapability": "meter_power.discharged"
       },
       "images": {
         "large": "/drivers/storage/assets/images/large.png",
