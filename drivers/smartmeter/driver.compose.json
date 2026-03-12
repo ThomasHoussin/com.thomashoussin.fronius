@@ -17,28 +17,28 @@
 	],
 	"capabilitiesOptions": {
 		"meter_power": {
-			"title": { "en": "Energy consumed" }
+			"title": { "en": "Energy consumed", "de": "Bezogene Energie" }
 		},
 		"meter_power.injected": {
-			"title": { "en": "Energy injected" }
+			"title": { "en": "Energy injected", "de": "Eingespeiste Energie" }
 		},
 		"measure_current": {
-			"title": { "en": "Current" }
+			"title": { "en": "Current", "de": "Strom" }
 		},
 		"measure_current.phase1": {
-			"title": { "en": "Current P1" }
+			"title": { "en": "Current P1", "de": "Strom P1" }
 		},
 		"measure_current.phase2": {
-			"title": { "en": "Current P2" }
+			"title": { "en": "Current P2", "de": "Strom P2" }
 		},
 		"measure_current.phase3": {
-			"title": { "en": "Current P3" }
+			"title": { "en": "Current P3", "de": "Strom P3" }
 		},
 		"measure_voltage": {
-			"title": { "en": "Voltage" }
+			"title": { "en": "Voltage", "de": "Spannung" }
 		},
 		"measure_frequency": {
-			"title": { "en": "Phase frequency" }
+			"title": { "en": "Phase frequency", "de": "Frequenz" }
 		}
 	},
 	"energy": {

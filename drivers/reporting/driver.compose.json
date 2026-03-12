@@ -20,34 +20,34 @@
 	],
 	"capabilitiesOptions": {
 		"meter_power.fromGrid": {
-			"title": { "en": "Energy from grid" }
+			"title": { "en": "Energy from grid", "de": "Bezogene Energie" }
 		},
 		"meter_power.toGrid": {
-			"title": { "en": "Energy injected" }
+			"title": { "en": "Energy injected", "de": "Eingespeiste Energie" }
 		},
 		"meter_power.produced": {
-			"title": { "en": "Energy produced" }
+			"title": { "en": "Energy produced", "de": "Erzeugte Energie" }
 		},
 		"selfconsumption": {
-			"title": { "en": "Self-consumption rate" }
+			"title": { "en": "Self-consumption rate", "de": "Eigenverbrauchsrate" }
 		},
 		"selfconsumption.month": {
-			"title": { "en": "Month self-consumption rate" }
+			"title": { "en": "Month self-consumption rate", "de": "Monatliche Eigenverbrauchsrate" }
 		},
 		"spending.day": {
-			"title": { "en": "Today spending" }
+			"title": { "en": "Today spending", "de": "Heutige Kosten" }
 		},
 		"savings.day": {
-			"title": { "en": "Today savings" }
+			"title": { "en": "Today savings", "de": "Heutige Einsparung" }
 		},
 		"spending.month": {
-			"title": { "en": "Month spending" }
+			"title": { "en": "Month spending", "de": "Monatliche Kosten" }
 		},
 		"spending.previousmonth": {
-			"title": { "en": "Previous month spending" }
+			"title": { "en": "Previous month spending", "de": "Kosten des vorherigen Monats" }
 		},
 		"savings.month": {
-			"title": { "en": "Month savings" }
+			"title": { "en": "Month savings", "de": "Monatliche Einsparung" }
 		},
 		"button.recoverHistory": {
 			"maintenanceAction": true,

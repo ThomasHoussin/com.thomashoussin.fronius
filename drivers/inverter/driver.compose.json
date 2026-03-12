@@ -23,46 +23,46 @@
 	],
 	"capabilitiesOptions": {
 		"meter_power": {
-			"title": { "en": "Daily Production" }
+			"title": { "en": "Daily Production", "de": "Tägliche Produktion" }
 		},
 		"meter_power.YEAR": {
-			"title": { "en": "Yearly Production" }
+			"title": { "en": "Yearly Production", "de": "Jährliche Produktion" }
 		},
 		"meter_power.TOTAL": {
-			"title": { "en": "Total Production" }
+			"title": { "en": "Total Production", "de": "Gesamtproduktion" }
 		},
 		"measure_current.AC": {
-			"title": { "en": "AC current" }
+			"title": { "en": "AC current", "de": "AC-Strom" }
 		},
 		"measure_current.DC": {
-			"title": { "en": "DC current" }
+			"title": { "en": "DC current", "de": "DC-Strom" }
 		},
 		"measure_current.DC2": {
-			"title": { "en": "DC current for MPPT tracker 2" }
+			"title": { "en": "DC current for MPPT tracker 2", "de": "DC-Strom für MPPT Tracker 2" }
 		},
 		"measure_current.DC3": {
-			"title": { "en": "DC current for MPPT tracker 3" }
+			"title": { "en": "DC current for MPPT tracker 3", "de": "DC-Strom für MPPT Tracker 3" }
 		},
 		"measure_current.DC4": {
-			"title": { "en": "DC current for MPPT tracker 4" }
+			"title": { "en": "DC current for MPPT tracker 4", "de": "DC-Strom für MPPT Tracker 4" }
 		},
 		"measure_voltage.AC": {
-			"title": { "en": "AC voltage" }
+			"title": { "en": "AC voltage", "de": "AC-Spannung" }
 		},
 		"measure_voltage.DC": {
-			"title": { "en": "DC voltage" }
+			"title": { "en": "DC voltage", "de": "DC-Spannung" }
 		},
 		"measure_voltage.DC2": {
-			"title": { "en": "DC voltage for MPPT tracker 2" }
+			"title": { "en": "DC voltage for MPPT tracker 2", "de": "DC-Spannung für MPPT Tracker 2" }
 		},
 		"measure_voltage.DC3": {
-			"title": { "en": "DC voltage for MPPT tracker 3" }
+			"title": { "en": "DC voltage for MPPT tracker 3", "de": "DC-Spannung für MPPT Tracker 3" }
 		},
 		"measure_voltage.DC4": {
-			"title": { "en": "DC voltage for MPPT tracker 4" }
+			"title": { "en": "DC voltage for MPPT tracker 4", "de": "DC-Spannung für MPPT Tracker 4" }
 		},
 		"measure_frequency": {
-			"title": { "en": "Phase frequency" }
+			"title": { "en": "Phase frequency", "de": "Frequenz" }
 		}
 	},
 	"images": {
