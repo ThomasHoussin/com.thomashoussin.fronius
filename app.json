@@ -232,6 +232,9 @@
         "meter_power.YEAR",
         "meter_power.TOTAL"
       ],
+      "energy": {
+        "meterPowerExportedCapability": "meter_power.TOTAL"
+      },
       "capabilitiesOptions": {
         "meter_power": {
           "title": {

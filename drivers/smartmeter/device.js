@@ -85,7 +85,13 @@ class Smartmeter extends FroniusDevice {
 			}
 		}
 
-		this.setEnergy({ cumulative: newSettings.cumulative }).then(
+		this.setEnergy({
+			cumulative: newSettings.cumulative,
+			cumulativeImportedCapability: "meter_power",
+			cumulativeExportedCapability: "meter_power.injected",
+			meterPowerImportedCapability: "meter_power",
+			meterPowerExportedCapability: "meter_power.injected",
+		}).then(
 			this.updateFroniusDevice(),
 		);
 	}
