@@ -4,6 +4,27 @@ class Smartmeter extends FroniusDevice {
 	async onInit() {
 		this.log("Smartmeter has been initialized");
 
+		// Up to 0.1.20 onSettings called setEnergy with the cumulative flag only. That call replaced
+		// the complete energy object and dropped the capabilities declared in the manifest, which left
+		// the device without import and export totals in the energy tab (issues #64 and #65). A device
+		// keeps that stripped object until it is written back. This block can go once no device runs a
+		// version that wiped the configuration.
+		try {
+			const energy = this.getEnergy();
+			if (energy && !energy.cumulativeImportedCapability) {
+				const cumulative = this.getSetting("cumulative");
+				this.log(
+					`Restoring energy configuration of device ${this.getName()}, cumulative ${cumulative}`,
+				);
+				await this.setEnergyFromManifest(cumulative);
+			}
+		} catch (error) {
+			this.error(
+				`Could not restore the energy configuration of device ${this.getName()}, saving the device settings applies it again`,
+				error,
+			);
+		}
+
 		//checking if adding 3-phase capability is needed
 		if (this.getSetting("threePhase")) {
 			if (!this.hasCapability("measure_current.phase1")) {
