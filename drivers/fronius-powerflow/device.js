@@ -51,7 +51,7 @@ class PowerFlow extends FroniusDevice {
 
 	async onSettings({ oldSettings, newSettings, changedKeys }) {
 		this.log("PowerFlow settings where changed");
-		this.setEnergy({ cumulative: newSettings.cumulative });
+		await this.setEnergyFromManifest(newSettings.cumulative);
 	}
 }
 

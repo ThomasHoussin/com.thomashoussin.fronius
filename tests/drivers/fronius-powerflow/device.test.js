@@ -1,7 +1,20 @@
+import { readFileSync } from "node:fs";
+import { join, resolve } from "node:path";
 import fetch from "node-fetch";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import PowerFlow from "../../../drivers/fronius-powerflow/device.js";
 import { createMockFetch } from "../../mocks/fetch.js";
+
+const PROJECT_ROOT = resolve(import.meta.dirname, "../../..");
+
+// onSettings writes back what the manifest declares, so the tests read the same file
+// instead of a copy that can drift away from it.
+const manifest = JSON.parse(
+	readFileSync(
+		join(PROJECT_ROOT, "drivers/fronius-powerflow/driver.compose.json"),
+		"utf8",
+	),
+);
 
 /**
  * Test wrapper for PowerFlow
@@ -9,6 +22,7 @@ import { createMockFetch } from "../../mocks/fetch.js";
 class TestPowerFlow extends PowerFlow {
 	constructor() {
 		super();
+		this.driver = { manifest: structuredClone(manifest) };
 		this._capabilities = new Set([
 			"measure_power",
 			"measure_power.PV",
@@ -290,7 +304,31 @@ describe("PowerFlow", () => {
 				changedKeys: ["cumulative"],
 			});
 
-			expect(setEnergySpy).toHaveBeenCalledWith({ cumulative: true });
+			expect(setEnergySpy).toHaveBeenCalledWith({
+				...manifest.energy,
+				cumulative: true,
+			});
+		});
+
+		it("should keep the capabilities declared in the manifest", async () => {
+			device.driver.manifest.energy = {
+				cumulative: true,
+				cumulativeImportedCapability: "meter_power",
+				cumulativeExportedCapability: "meter_power.injected",
+			};
+			const setEnergySpy = vi.spyOn(device, "setEnergy");
+
+			await device.onSettings({
+				oldSettings: { cumulative: true },
+				newSettings: { cumulative: false },
+				changedKeys: ["cumulative"],
+			});
+
+			expect(setEnergySpy).toHaveBeenCalledWith({
+				cumulative: false,
+				cumulativeImportedCapability: "meter_power",
+				cumulativeExportedCapability: "meter_power.injected",
+			});
 		});
 	});
 });
