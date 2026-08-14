@@ -1,5 +1,18 @@
+import { readFileSync } from "node:fs";
+import { join, resolve } from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import Smartmeter from "../../../drivers/smartmeter/device.js";
+
+const PROJECT_ROOT = resolve(import.meta.dirname, "../../..");
+
+// The repair in onInit writes back what the manifest declares, so the tests read the same file
+// instead of a copy that can drift away from it.
+const manifest = JSON.parse(
+	readFileSync(
+		join(PROJECT_ROOT, "drivers/smartmeter/driver.compose.json"),
+		"utf8",
+	),
+);
 
 /**
  * Test wrapper for Smartmeter
@@ -7,6 +20,8 @@ import Smartmeter from "../../../drivers/smartmeter/device.js";
 class TestSmartmeter extends Smartmeter {
 	constructor() {
 		super();
+		this.driver = { manifest: structuredClone(manifest) };
+		this._energy = null;
 		this._capabilities = new Set([
 			"measure_power",
 			"measure_current",
@@ -58,7 +73,11 @@ class TestSmartmeter extends Smartmeter {
 	}
 	log() {}
 	error() {}
-	setEnergy() {
+	getEnergy() {
+		return this._energy;
+	}
+	setEnergy(energy) {
+		this._energy = energy;
 		return Promise.resolve();
 	}
 	updateFroniusDevice() {}
@@ -117,6 +136,82 @@ describe("Smartmeter", () => {
 		});
 
 		it("should enable polling", async () => {
+			await device.onInit();
+
+			expect(device.polling).toBe(true);
+		});
+	});
+
+	describe("onInit - energy configuration repair", () => {
+		beforeEach(() => {
+			device.pollDevice = vi.fn();
+		});
+
+		it("should restore the manifest configuration when the cumulative capabilities are missing", async () => {
+			device._energy = { cumulative: true };
+
+			await device.onInit();
+
+			expect(device.getEnergy()).toEqual({
+				...manifest.energy,
+				cumulative: true,
+			});
+		});
+
+		it("should restore with the cumulative setting of the device", async () => {
+			device._energy = { cumulative: true };
+			device._settings.cumulative = false;
+
+			await device.onInit();
+
+			expect(device.getEnergy()).toEqual({
+				...manifest.energy,
+				cumulative: false,
+			});
+		});
+
+		it("should leave an intact configuration alone", async () => {
+			device._energy = { ...manifest.energy };
+			const setEnergySpy = vi.spyOn(device, "setEnergy");
+
+			await device.onInit();
+
+			expect(setEnergySpy).not.toHaveBeenCalled();
+		});
+
+		it("should leave a device without energy override alone", async () => {
+			device._energy = null;
+			const setEnergySpy = vi.spyOn(device, "setEnergy");
+
+			await device.onInit();
+
+			expect(setEnergySpy).not.toHaveBeenCalled();
+		});
+
+		it("should restore once and not on every start", async () => {
+			device._energy = { cumulative: true };
+			await device.onInit();
+			const setEnergySpy = vi.spyOn(device, "setEnergy");
+
+			await device.onInit();
+
+			expect(setEnergySpy).not.toHaveBeenCalled();
+		});
+
+		it("should keep initializing when restoring fails", async () => {
+			device._energy = { cumulative: true };
+			vi.spyOn(device, "setEnergy").mockRejectedValue(new Error("offline"));
+
+			await device.onInit();
+
+			expect(device.polling).toBe(true);
+		});
+
+		it("should keep initializing when reading the energy object fails", async () => {
+			vi.spyOn(device, "getEnergy").mockImplementation(() => {
+				throw new Error("not supported");
+			});
+
 			await device.onInit();
 
 			expect(device.polling).toBe(true);

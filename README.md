@@ -16,6 +16,9 @@ Feel free to donate to  support the project !
 [<img src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif">](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=RVBS24SPLU922&currency_code=EUR)
 
 # Version History
+### Unreleased:
+	Fixed smartmeter losing its energy configuration when device settings are saved; devices that lost it are restored on startup (#64, #65)
+	Fixed PowerFlow dropping the energy configuration of its manifest when device settings are saved
 ### 0.1.20:
 	Bugfix on doSubmit in pairing HTML files. Fixed typo in HTML files.
 ### 0.1.19:
